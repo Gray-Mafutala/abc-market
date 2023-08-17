@@ -1,0 +1,41 @@
+@import url('https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+input[type=search]::-webkit-search-cancel-button,
+input[type=search]::-webkit-search-decoration,
+input[type=search]::-webkit-search-results-button,
+input[type=search]::-webkit-search-results-decoration {
+    display: none
+}
+
+input[type=search]::-ms-clear,
+input[type=search]::-ms-reveal {
+    display: none;
+    width: 0;
+    height: 0
+}
+
+@layer base {
+    body {
+        @apply font-hk-grotesk
+    }
+}
+
+@layer components {
+    .centered-container {
+        @apply max-w-[1200px] mx-auto
+    }
+}
+
+@layer utilities {
+    .scrollbar-w-2::-webkit-scrollbar {
+        @apply bg-gray-200 w-1;
+    }
+
+    .scrollbar-w-2::-webkit-scrollbar-thumb {
+        @apply bg-primary-blue/20
+    }
+}
