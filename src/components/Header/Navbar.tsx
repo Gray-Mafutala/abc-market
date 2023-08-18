@@ -15,7 +15,7 @@ const Navbar = () => {
   const [mobileMenu, setMobileMenu] = useState(false);
 
   return (
-    <nav className="px-4 border-b border-b-[#ededed]">
+    <nav className="px-4 bg-white border-b border-b-[#ededed]">
       {/* container */}
       <div
         className="centered-container py-3 mobileL:py-5 flex items-center 

@@ -1,14 +1,34 @@
+import useIntersectionObserver from "../../hooks/useIntersectionObserver";
 import CategoriesBottomBar from "./CategoriesBottomBar";
 import Navbar from "./Navbar";
 import WelcomeTopBar from "./WelcomeTopBar";
 
 const Header = () => {
+  const [watcherRef, isIntersecting] = useIntersectionObserver();
+
   return (
-    <header>
-      <WelcomeTopBar />
-      <Navbar />
-      <CategoriesBottomBar />
-    </header>
+    <>
+      {/* nav sticky */}
+      <div
+        className={
+          isIntersecting
+            ? "fixed -translate-y-[100%]"
+            : "translate-y-0 duration-500 ease-out fixed w-full z-20"
+        }
+      >
+        <Navbar />
+      </div>
+
+      <header>
+        <WelcomeTopBar />
+        <Navbar />
+
+        {/* watcher to show nav-sticky */}
+        <div ref={watcherRef}></div>
+
+        <CategoriesBottomBar />
+      </header>
+    </>
   );
 };
 
