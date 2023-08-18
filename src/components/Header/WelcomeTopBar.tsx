@@ -1,4 +1,5 @@
-import { CiLocationOn, CiDeliveryTruck, CiDiscount1 } from "react-icons/ci";
+import { MdLocationOn } from "react-icons/md";
+import { TbTruckDelivery, TbDiscount2 } from "react-icons/tb";
 
 const WelcomeTopBar = () => {
   return (
@@ -13,9 +14,9 @@ const WelcomeTopBar = () => {
         <div className="flex items-center gap-x-4">
           <button
             className="flex items-center gap-x-[6px] duration-300
-            hover:text-primary-blue rounded-md"
+            hover:text-primary-blue"
           >
-            <CiLocationOn size={18} className="text-primary-blue" />
+            <MdLocationOn size={18} className="text-primary-blue" />
             <span className="pr-4 border-r border-r-[#d9d9d9]">
               Select your location
             </span>
@@ -23,9 +24,9 @@ const WelcomeTopBar = () => {
 
           <button
             className="flex items-center gap-x-[6px] duration-300
-            hover:text-primary-blue rounded-md"
+            hover:text-primary-blue"
           >
-            <CiDeliveryTruck size={18} className="text-primary-blue" />
+            <TbTruckDelivery size={18} className="text-primary-blue" />
             <span className="pr-4 border-r border-r-[#d9d9d9]">
               Track your order
             </span>
@@ -33,9 +34,9 @@ const WelcomeTopBar = () => {
 
           <button
             className="flex items-center gap-x-[6px] duration-300
-            hover:text-primary-blue rounded-md"
+            hover:text-primary-blue"
           >
-            <CiDiscount1 size={18} className="text-primary-blue" />
+            <TbDiscount2 size={18} className="text-primary-blue" />
             <span>All Offers</span>
           </button>
         </div>

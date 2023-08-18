@@ -32,10 +32,10 @@ input[type=search]::-ms-reveal {
 
 @layer utilities {
     .scrollbar-w-2::-webkit-scrollbar {
-        @apply bg-gray-200 w-1;
+        @apply bg-gray-50 w-1;
     }
 
     .scrollbar-w-2::-webkit-scrollbar-thumb {
-        @apply bg-primary-blue/20
+        @apply bg-primary-blue/80
     }
 }

@@ -1,7 +1,7 @@
 import React from "react";
 
-import ModalWrapper from "../../ModalWrapper";
-import SearchBar from ".";
+import ModalWrapper from "../ModalWrapper";
+import SearchBar from "./SearchBar";
 
 import { LuSearch } from "react-icons/lu";
 
@@ -18,8 +18,8 @@ const MobileSearchBar = ({ open, setOpen }: MobileSearchBarProps) => {
         <ModalWrapper
           onClose={() => setOpen(false)}
           modalWrapperAddStyles="inset-0"
-          modalContentContainerStyles="flex justify-center items-center 
-          pt-16 px-4"
+          closeBtnAddStyles="-top-12 right-4"
+          innerWrapperStyles="max-w-xl mx-auto relative mt-16 px-3 mobileM:px-4"
         >
           <SearchBar />
         </ModalWrapper>
