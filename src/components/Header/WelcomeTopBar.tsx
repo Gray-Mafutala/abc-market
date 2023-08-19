@@ -4,7 +4,7 @@ import { TbTruckDelivery, TbDiscount2 } from "react-icons/tb";
 const WelcomeTopBar = () => {
   return (
     <div className="hidden tablet:block px-4 bg-off-white">
-      {/* container */}
+      {/* center inner container */}
       <div
         className="centered-container h-[42px] flex items-center justify-between 
         text-gray-500 text-sm"

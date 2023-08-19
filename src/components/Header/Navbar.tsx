@@ -16,7 +16,7 @@ const Navbar = () => {
 
   return (
     <nav className="px-4 bg-white border-b border-b-[#ededed]">
-      {/* container */}
+      {/* center inner wrapper */}
       <div
         className="centered-container py-3 mobileL:py-5 flex items-center 
         justify-between gap-x-8"
@@ -25,13 +25,14 @@ const Navbar = () => {
         <div className="flex items-center gap-x-4">
           <MobileMenu open={mobileMenu} setOpen={setMobileMenu} />
 
-          <Link
-            to="/"
-            className="text-2xl text-primary-blue/80 font-bold 
-            duration-300 hover:opacity-80 whitespace-nowrap"
-          >
-            ABC <span className="text-slate-400 font-medium">Market</span>
-          </Link>
+          <h1 className="text-2xl text-primary-blue/80 font-bold 
+            duration-300 hover:opacity-80 whitespace-nowrap">
+            <Link
+              to="/"
+            >
+              ABC <span className="text-slate-400 font-medium">Market</span>
+            </Link>
+          </h1>
         </div>
 
         {/* center content - SearchBox */}
