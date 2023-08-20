@@ -1,15 +1,15 @@
 import { useEffect, useState } from "react";
 
-type UseFetchResponse = {
-    data: string;
-    isLoading: boolean;
-    error: Error
-}
+interface State<T> {
+    data?: T
+    isLoading:boolean
+    error?: Error
+  }
 
-const useFetch = <T>(url: string):UseFetchResponse => {
-  const [data, setData] = useState<T>();
+const useFetch = <T= unknown>(url: string):State<T> => {
+  const [data, setData] = useState<T>([] as T);
   const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState<T>();
+  const [error, setError] = useState();
 
     
   useEffect(() => {
@@ -19,7 +19,7 @@ const useFetch = <T>(url: string):UseFetchResponse => {
         setData(json);
       })
       .catch((error) => {
-        setError(error.message);
+        setError(error);
       })
       .finally(() => {
         setIsLoading(false);

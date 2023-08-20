@@ -30,7 +30,7 @@ const Navbar = () => {
             <Link
               to="/"
             >
-              ABC <span className="text-slate-400 font-medium">Market</span>
+              ABC <span className="text-slate-400">Market</span>
             </Link>
           </h1>
         </div>

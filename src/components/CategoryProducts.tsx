@@ -17,7 +17,8 @@ const CategoryProducts = ({ titlePrefix, category }: CategoryProductsProps) => {
   );
 
   // if an error has occurred
-  if (error) return <ErrorDisplay msg={`An error has occurred: ${error.message}`} />;
+  if (error)
+    return <ErrorDisplay msg={`An error has occurred: ${error.message}`} />;
 
   // isLoading
   if (isLoading) return <Loader />;
@@ -36,7 +37,7 @@ const CategoryProducts = ({ titlePrefix, category }: CategoryProductsProps) => {
         >
           {titlePrefix}{" "}
           <strong className="text-primary-blue/80">
-            {titlePrefix.charAt(0).toUpperCase() + category.slice(1)}
+            {category.charAt(0).toUpperCase() + category.slice(1)}
           </strong>
         </h2>
 
@@ -52,7 +53,7 @@ const CategoryProducts = ({ titlePrefix, category }: CategoryProductsProps) => {
       </header>
 
       {/* first 4 products of this category */}
-      <ul className="grid grid-cols-4">
+      <ul className="grid grid-cols-4 gap-x-6">
         {data !== undefined &&
           data.map((product) => (
             <ProductCard

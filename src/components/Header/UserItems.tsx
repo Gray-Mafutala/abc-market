@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 
 import { HiOutlineHeart } from "react-icons/hi";
 import { FiShoppingCart, FiUser } from "react-icons/fi";
+
 import { BiSolidPackage } from "react-icons/bi";
 
 const userItems = [
