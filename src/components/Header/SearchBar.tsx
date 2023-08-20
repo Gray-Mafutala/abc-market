@@ -27,7 +27,6 @@ const SearchBar = ({ addStyles }: SearchBarProps) => {
       {/* input search */}
       <input
         type="search"
-        autoFocus
         placeholder="Search in market..."
         className="pl-12 pr-14 w-full h-12 leading-[18px] rounded-[10px] 
         border-2 border-transparent hover:border-primary-blue/40 

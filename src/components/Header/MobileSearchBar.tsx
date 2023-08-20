@@ -14,16 +14,18 @@ const MobileSearchBar = ({ open, setOpen }: MobileSearchBarProps) => {
   return (
     <>
       {/* searchbox wrapper */}
-      {open && (
-        <ModalWrapper
-          onClose={() => setOpen(false)}
-          modalWrapperAddStyles="inset-0"
-          closeBtnAddStyles="-top-12 right-4"
-          innerWrapperStyles="max-w-xl mx-auto relative mt-16 px-3 mobileM:px-4"
-        >
-          <SearchBar />
-        </ModalWrapper>
-      )}
+      <ModalWrapper
+        onClose={() => setOpen(false)}
+        modalWrapperAddStyles={
+          open
+            ? "inset-0 duration-300"
+            : "inset-0 -translate-y-[100%] duration-300"
+        }
+        closeBtnAddStyles="-top-12 right-4"
+        innerWrapperStyles="max-w-xl mx-auto relative mt-16 px-3 mobileM:px-4"
+      >
+        <SearchBar />
+      </ModalWrapper>
 
       {/* btn to show searchbox wrapper */}
       <button

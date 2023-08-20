@@ -16,8 +16,11 @@ const AddToCartManager = () => {
           hover:border-transparent hover:bg-primary-blue/70
           [&>*]:hover:text-white"
         >
-          <span>Add to cart {qty}</span>
-          <MdAddShoppingCart size={24} className="text-slate-400" />
+          <span>Add to cart</span>
+          <MdAddShoppingCart
+            size={24}
+            className="min-w-[24px] text-slate-400"
+          />
         </button>
       ) : (
         <div

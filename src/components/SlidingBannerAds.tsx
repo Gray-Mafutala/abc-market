@@ -45,22 +45,22 @@ const SlidingBannerAds = ({ sliders }: SlidingBannerAdsProps) => {
       <button
         onClick={goToPrevSlide}
         className="absolute left-2 top-1/2 -translate-y-1/2
-          p-2 rounded-full bg-blue-light text-slate-500 
-          hover:text-primary-blue duration-300 ease-out
-          active:scale-95 z-10"
+        p-2 rounded-full bg-blue-light text-slate-500 
+        hover:text-primary-blue duration-300 ease-out
+        active:scale-95 z-10"
       >
-        <IoIosArrowBack size={32} />
+        <IoIosArrowBack className="text-[1.5rem] mobileM:text-[2rem]" />
       </button>
 
       {/* right button */}
       <button
         onClick={goToNextSlide}
         className="absolute right-2 top-1/2 -translate-y-1/2
-          p-2 rounded-full bg-blue-light text-slate-500 
-          hover:text-primary-blue duration-300 ease-out
-          active:scale-95 z-10"
+        p-2 rounded-full bg-blue-light text-slate-500 
+        hover:text-primary-blue duration-300 ease-out
+        active:scale-95 z-10"
       >
-        <IoIosArrowForward size={32} />
+        <IoIosArrowForward className="text-[1.5rem] mobileM:text-[2rem]" />
       </button>
 
       {/* dots navigation */}

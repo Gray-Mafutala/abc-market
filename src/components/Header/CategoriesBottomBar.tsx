@@ -12,6 +12,8 @@ const CategoriesBottomBar = () => {
         duration-300 hover:bg-primary-blue/80 hover:text-white 
         active:bg-transparent active:text-primary-blue 
         active:shadow-[0_0_0_2px_#008ecc] focus:shadow[0_0_0_2px_#008ecc]"
+        activeItemStyles="px-[14px] py-[10px] rounded-[18px]
+        bg-primary-blue/80 text-white"
       />
     </ul>
   );

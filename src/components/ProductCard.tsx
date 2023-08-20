@@ -102,7 +102,7 @@ const ProductCard = ({
       </div>
 
       {/* rating */}
-      <div className="mt-3 flex items-center justify-center cursor-pointer">
+      <div className="mt-3 px-4 flex items-center justify-center cursor-pointer">
         <StarRating rate={rating.rate} />
         <span className="text-sm font-medium text-slate-500 ml-4">
           ({rating.count})

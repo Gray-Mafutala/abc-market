@@ -47,9 +47,11 @@ const Navbar = () => {
           tabletM:[&>*]:flex"
         >
           <UserItems
-            itemStyles="item relative min-w-[68px] w-full flex flex-col 
+            itemStyles="relative min-w-[68px] w-full flex flex-col 
             items-center gap-y-1 
             [&>*:not(.notif)]:hover:text-primary-blue/80"
+            activeItemStyles="relative min-w-[68px] w-full flex flex-col 
+            items-center gap-y-1 text-primary-blue/80"
             notifStyles="absolute text-white font-semibold text-xs
             -top-2 -right-[10px] bg-red-400 rounded-xl pt-[1px] text-center
             px-[6px] truncate min-w-[28px] max-w-[36px] notif"

@@ -24,16 +24,18 @@ const CategoryProducts = ({ titlePrefix, category }: CategoryProductsProps) => {
   if (isLoading) return <Loader />;
 
   return (
-    <section className="flex flex-col gap-y-10">
+    <section id={category} className="flex flex-col gap-y-10">
       {/* header */}
       <header
         className="flex items-center justify-between border-b
-        pb-4 border-b-[#ededed]"
+        pb-3 mobileL:pb-4 border-b-[#ededed] gap-x-8"
       >
         <h2
-          className="text-2xl text-slate-500 font-bold relative
-          after:absolute after:w-full after:h-1 after:bg-primary-blue/80
-          after:left-0 after:-bottom-4 after:rounded-md"
+          className="text-lg mobileL:text-xl mobileXL:text-2xl 
+          text-slate-500 font-bold relative after:absolute 
+          after:w-full after:h-1 after:left-0 after:-bottom-3
+          mobileL:after:-bottom-4 after:bg-primary-blue/80
+          after:rounded-md inline-grid mobileM:block"
         >
           {titlePrefix}{" "}
           <strong className="text-primary-blue/80">
@@ -53,7 +55,10 @@ const CategoryProducts = ({ titlePrefix, category }: CategoryProductsProps) => {
       </header>
 
       {/* first 4 products of this category */}
-      <ul className="grid grid-cols-4 gap-x-6">
+      <ul
+        className="grid grid-cols-1 gap-y-8 gap-x-6 mobileXL:grid-cols-2 
+        tabletM:grid-cols-3 laptop:grid-cols-4"
+      >
         {data !== undefined &&
           data.map((product) => (
             <ProductCard

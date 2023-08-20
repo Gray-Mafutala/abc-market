@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 import { HiOutlineHeart } from "react-icons/hi";
 import { FiShoppingCart, FiUser } from "react-icons/fi";
@@ -14,25 +14,36 @@ const userItems = [
 
 type UserItemsProps = {
   itemStyles: string;
+  activeItemStyles: string;
   notifStyles: string;
   iconStyles: string;
   titleStyles: string;
+  hideMobileMenu?: () => void;
 };
 
 const UserItems = ({
   itemStyles,
+  activeItemStyles,
   notifStyles,
   iconStyles,
   titleStyles,
+  hideMobileMenu,
 }: UserItemsProps) => {
   return (
     <>
       {userItems.map(({ title, link, icon }) => (
-          <Link key={title} to={link} className={itemStyles}>
+        <NavLink
+          key={title}
+          onClick={hideMobileMenu}
+          to={link}
+          className={({ isActive }) =>
+            isActive ? `${activeItemStyles}` : `${itemStyles}`
+          }
+        >
           <span className={notifStyles}>5</span>
           <span className={iconStyles}>{icon}</span>
           <span className={titleStyles}>{title}</span>
-        </Link>
+        </NavLink>
       ))}
     </>
   );

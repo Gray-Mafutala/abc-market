@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import CategoryProducts from "../components/CategoryProducts";
 import SlidingBannerAds from "../components/SlidingBannerAds";
 
@@ -23,17 +25,23 @@ const sliders = [
 ];
 
 const Home = () => {
+    const { hash } = useLocation();
+    // for scrolling to active section
+  useEffect(() => {
+    if (hash) window.location.href = hash;
+  }, [hash]);
+    
   return (
-    <main className="px-4 pt-5 pb-32 bg-slate-50">
+    <main className="px-4 pt-8 pb-32 bg-slate-50">
       {/* center inner wrapper */}
-      <div className="centered-container flex flex-col gap-y-32">
+      <div
+        className="centered-container flex flex-col 
+        gap-y-12 mobileL:gap-y-16 tablet:gap-20 laptop:gap-y-32"
+      >
         <SlidingBannerAds sliders={sliders} />
 
         {/* Electronics products */}
-        <CategoryProducts
-          titlePrefix="Grab the best deals on"
-          category="electronics"
-        />
+        <CategoryProducts titlePrefix="The best on" category="electronics" />
 
         {/* Jewelery products */}
         <CategoryProducts titlePrefix="Top" category="jewelery" />
