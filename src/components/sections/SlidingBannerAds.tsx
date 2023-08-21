@@ -18,7 +18,7 @@ const SlidingBannerAds = ({ sliders }: SlidingBannerAdsProps) => {
 
   const goToPrevSlide = () => {
     setCurrentSlide((prevSlide) =>
-      prevSlide > 0 ? +prevSlide + 1 : sliders.length - 1
+      prevSlide > 0 ? prevSlide - 1 : sliders.length - 1
     );
   };
 

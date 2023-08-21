@@ -14,6 +14,17 @@ export default {
         "hk-grotesk": ["Hanken Grotesk", "sans-serif"],
       },
 
+      animation: {
+        "shine": "shine 1.8s linear infinite",
+      },
+
+      keyframes: {
+        shine: {
+          "0%": { backgroundPosition: "-140px" },
+          "40%, 100%": { backgroundPosition: "200px" },
+        },
+      },
+
       screens: {
         mobile: "320px",
         mobileM: "475px",

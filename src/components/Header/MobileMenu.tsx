@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import ModalWrapper from "../ModalWrapper";
+import ModalWrapper from "../wrappers/ModalWrapper";
 import CategoryItems from "./CategoryItems";
 import UserItems from "./UserItems";
 
@@ -22,12 +22,15 @@ const verticalNavItems = [
 
 const MobileMenu = ({ open, setOpen }: MobileMenuProps) => {
   const [current, setCurrent] = useState(1);
+  const showMobileMenu = () => setOpen(true);
+  const closeMobileMenu = () => setOpen(false);
 
   return (
     <>
       {/* searchbox wrapper */}
       <ModalWrapper
-        onClose={() => setOpen(false)}
+        isOpen={open}
+        onClose={closeMobileMenu}
         modalWrapperAddStyles={
           open
             ? "inset-0 duration-300"
@@ -65,19 +68,19 @@ const MobileMenu = ({ open, setOpen }: MobileMenuProps) => {
         {current === 1 && (
           <div
             className="flex-grow px-4 pt-16 pb-8 flex flex-col items-start 
-              gap-y-5"
+            gap-y-5"
           >
             <UserItems
               itemStyles="relative w-full flex items-center gap-x-4
-                [&>*:not(.notif)]:hover:text-primary-blue/80"
+              [&>*:not(.notif)]:hover:text-primary-blue/80"
               activeItemStyles="relative w-full flex items-center gap-x-4
-                text-primary-blue/80"
+              text-primary-blue/80"
               notifStyles="absolute right-0 font-semibold text-white
-                bg-red-400 text-sm rounded-full px-[6px] py-1 truncate 
-                min-w-[28px] max-w-[48px] text-center notif"
+              bg-red-400 text-sm rounded-full px-[6px] py-1 truncate 
+              min-w-[28px] max-w-[48px] text-center notif"
               iconStyles="text-[24px] mobileL:text-[28px] duration-300"
               titleStyles="text-base mobileL:text-lg duration-300"
-              hideMobileMenu={() => setOpen(false)}
+              hideMobileMenu={closeMobileMenu}
             />
           </div>
         )}
@@ -129,14 +132,14 @@ const MobileMenu = ({ open, setOpen }: MobileMenuProps) => {
         {current === 3 && (
           <ul
             className="flex-grow px-4 pt-16 pb-8 flex flex-col items-start 
-              gap-y-5 text-base mobileL:text-lg"
+            gap-y-5 text-base mobileL:text-lg"
           >
             <CategoryItems
               withIcon={true}
               itemStyles="leading-[18px] whitespace-nowrap duration-300
-                hover:text-primary-blue/80"
+              hover:text-primary-blue/80"
               activeItemStyles="text-primary-blue/80"
-              hideMobileMenu={() => setOpen(false)}
+              hideMobileMenu={closeMobileMenu}
             />
           </ul>
         )}
@@ -144,7 +147,7 @@ const MobileMenu = ({ open, setOpen }: MobileMenuProps) => {
 
       {/* btn to show mobile menu */}
       <button
-        onClick={() => setOpen(true)}
+        onClick={showMobileMenu}
         className="px-[6px] py-[6px] rounded-[4px] flex items-center 
         justify-center odd:bg-blue-light text-primary-blue/80 duration-300 
         hover:bg-primary-blue/80 hover:text-white active:bg-transparent

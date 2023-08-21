@@ -2,7 +2,7 @@ import { useMemo } from "react";
 import AddToCartManager from "./AddToCartManager";
 import { HiHeart } from "react-icons/hi";
 import { TbDiscountCheckFilled } from "react-icons/tb";
-import StarRating from "./ui/StarRating";
+import StarRating from "../ui/StarRating";
 
 type ProductCardProps = {
   id: number;
@@ -14,9 +14,9 @@ type ProductCardProps = {
 };
 
 const ProductCard = ({
-  id,
+//  id,
   title,
-  description,
+//  description,
   price,
   image,
   rating,
@@ -32,8 +32,8 @@ const ProductCard = ({
   return (
     <li
       className="relative min-h-[268px] h-full list-none bg-white
-      border border-slate-200 rounded-md flex flex-col
-      pt-10 pb-2 px-4"
+      border border-slate-200 rounded-lg flex flex-col pt-10 pb-4
+      px-4"
     >
       {/* fake discount % */}
       {discountPercentage > 0 && (

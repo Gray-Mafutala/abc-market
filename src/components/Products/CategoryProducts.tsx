@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
-import useFetch from "../hooks/useFetch";
+import useFetch from "../../hooks/useFetch";
 import ProductCard from "./ProductCard";
 import { IoIosArrowForward } from "react-icons/io";
-import Loader from "./ui/Loader";
-import ErrorDisplay from "./ui/ErrorDisplay";
+import ErrorDisplay from "../ui/ErrorDisplay";
+import SkeletonProductCard from "./SkeletonProductCard";
 
 type CategoryProductsProps = {
   titlePrefix: string;
@@ -20,8 +20,8 @@ const CategoryProducts = ({ titlePrefix, category }: CategoryProductsProps) => {
   if (error)
     return <ErrorDisplay msg={`An error has occurred: ${error.message}`} />;
 
-  // isLoading
-  if (isLoading) return <Loader />;
+  //  // isLoading
+  //  if (isLoading) return <Loader />;
 
   return (
     <section id={category} className="flex flex-col gap-y-10">
@@ -54,23 +54,40 @@ const CategoryProducts = ({ titlePrefix, category }: CategoryProductsProps) => {
         </Link>
       </header>
 
-      {/* first 4 products of this category */}
-      <ul
-        className="grid grid-cols-1 gap-y-8 gap-x-6 mobileXL:grid-cols-2 
+      {/* if isLoading===true, then show Skeleton loading... */}
+      {isLoading && (
+        <ul
+          className="grid grid-cols-1 gap-y-8 gap-x-6 mobileXL:grid-cols-2 
+            tabletM:grid-cols-3 laptop:grid-cols-4"
+        >
+          <SkeletonProductCard />
+          <SkeletonProductCard />
+          <SkeletonProductCard />
+          <SkeletonProductCard />
+        </ul>
+      )}
+
+      {/* if isLoading===false, then show first 4 products
+            (ProductCard) of this category */}
+      {!isLoading && (
+        <ul
+          className="grid grid-cols-1 gap-y-8 gap-x-6 mobileXL:grid-cols-2 
         tabletM:grid-cols-3 laptop:grid-cols-4"
-      >
-        {data !== undefined &&
-          data.map((product) => (
-            <ProductCard
-              id={product.id}
-              title={product.title}
-              description={product.description}
-              price={product.price}
-              image={product.image}
-              rating={product.rating}
-            />
-          ))}
-      </ul>
+        >
+          {data !== undefined &&
+            data.map((product) => (
+              <ProductCard
+                key={product.id}
+                id={product.id}
+                title={product.title}
+                description={product.description}
+                price={product.price}
+                image={product.image}
+                rating={product.rating}
+              />
+            ))}
+        </ul>
+      )}
     </section>
   );
 };

@@ -11,7 +11,7 @@ const AddToCartManager = () => {
         <button
           onClick={() => setQty(1)}
           className="border border-slate-300 text-slate-500 text-lg 
-          font-medium w-full py-2 px-4 rounded-[18px] flex items-center
+          font-medium w-full h-[46px] px-4 rounded-3xl flex items-center
           justify-center gap-x-4 whitespace-nowrap duration-300
           hover:border-transparent hover:bg-primary-blue/70
           [&>*]:hover:text-white"
@@ -24,14 +24,15 @@ const AddToCartManager = () => {
         </button>
       ) : (
         <div
-          className="border border-slate-300 rounded-[18px]
+          className="h-[46px] border border-slate-300 rounded-3xl
           flex items-center justify-between"
         >
           {/* btn to remove */}
           <button
             onClick={() => setQty((prev) => prev - 1)}
-            className="py-2 border-r flex-grow flex justify-center
-            text-slate-500 hover:text-primary-blue/70 duration-300"
+            className="h-full border-r flex-grow flex justify-center
+            items-center text-slate-500 hover:text-primary-blue/70
+            duration-300"
           >
             <TbMinus size={24} />
           </button>
@@ -47,8 +48,9 @@ const AddToCartManager = () => {
           {/* btn to add */}
           <button
             onClick={() => setQty((prev) => prev + 1)}
-            className="py-2 border-l flex-grow flex justify-center
-            text-slate-500 hover:text-primary-blue/70 duration-300"
+            className="h-full border-l flex-grow flex justify-center
+            items-center text-slate-500 hover:text-primary-blue/70
+            duration-300"
           >
             <TbPlus size={24} />
           </button>

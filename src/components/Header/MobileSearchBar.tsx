@@ -1,6 +1,6 @@
 import React from "react";
 
-import ModalWrapper from "../ModalWrapper";
+import ModalWrapper from "../wrappers/ModalWrapper";
 import SearchBar from "./SearchBar";
 
 import { LuSearch } from "react-icons/lu";
@@ -11,11 +11,15 @@ type MobileSearchBarProps = {
 };
 
 const MobileSearchBar = ({ open, setOpen }: MobileSearchBarProps) => {
+  const showMobileSearchBar = () => setOpen(true);
+  const closeMobileSearchBar = () => setOpen(false);
+
   return (
     <>
       {/* searchbox wrapper */}
       <ModalWrapper
-        onClose={() => setOpen(false)}
+        isOpen={open}
+        onClose={closeMobileSearchBar}
         modalWrapperAddStyles={
           open
             ? "inset-0 duration-300"
@@ -29,7 +33,7 @@ const MobileSearchBar = ({ open, setOpen }: MobileSearchBarProps) => {
 
       {/* btn to show searchbox wrapper */}
       <button
-        onClick={() => setOpen(true)}
+        onClick={showMobileSearchBar}
         className="block mobileL:hidden px-[6px] py-[6px] rounded-[4px]
         text-primary-blue/80 active:bg-primary-blue/80
         active:text-white duration-300"

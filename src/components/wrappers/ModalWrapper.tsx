@@ -8,6 +8,7 @@ type ModalWrapperProps = {
   modalWrapperAddStyles?: string;
   innerWrapperStyles: string;
   closeBtnAddStyles?: string;
+  isOpen: boolean;
 };
 
 const ModalWrapper = ({
@@ -16,13 +17,14 @@ const ModalWrapper = ({
   modalWrapperAddStyles = "",
   innerWrapperStyles,
   closeBtnAddStyles = "",
+  isOpen,
 }: ModalWrapperProps) => {
   useEffect(() => {
-    document.body.style.overflow = "hidden";
+    if (isOpen === true) document.body.style.overflow = "hidden";
     return () => {
       document.body.style.overflow = "visible";
     };
-  }, []);
+  }, [isOpen]);
 
   return createPortal(
     //  modal wrapper
