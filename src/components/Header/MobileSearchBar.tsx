@@ -1,6 +1,6 @@
 import React from "react";
 
-import ModalWrapper from "../wrappers/ModalWrapper";
+import ModalWrapper from "../Wrappers/ModalWrapper";
 import SearchBar from "./SearchBar";
 
 import { LuSearch } from "react-icons/lu";

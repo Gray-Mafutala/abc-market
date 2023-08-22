@@ -2,7 +2,7 @@ import { useMemo } from "react";
 import AddToCartManager from "./AddToCartManager";
 import { HiHeart } from "react-icons/hi";
 import { TbDiscountCheckFilled } from "react-icons/tb";
-import StarRating from "../ui/StarRating";
+import StarRating from "../UI/StarRating";
 
 type ProductCardProps = {
   id: number;

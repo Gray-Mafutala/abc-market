@@ -1,13 +1,12 @@
 import { Suspense } from "react";
-import Layout from "./pages/Layout";
 import Routing from "./routes";
+import Layout from "./pages/Layout";
+import PageLoader from "./components/UI/PageLoader";
 
 const App = () => {
   return (
     <Layout>
-      <Suspense
-        fallback={<div className="mt-8 text-center">Page Loading...</div>}
-      >
+      <Suspense fallback={<PageLoader />}>
         <Routing />
       </Suspense>
     </Layout>

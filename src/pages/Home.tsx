@@ -1,5 +1,5 @@
 import CategoryProducts from "../components/Products/CategoryProducts";
-import SlidingBannerAds from "../components/sections/SlidingBannerAds";
+import SlidingBannerAds from "../components/Sections/SlidingBannerAds";
 
 const sliders = [
   {

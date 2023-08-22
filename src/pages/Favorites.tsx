@@ -1,11 +1,11 @@
 import PageWrapper from "../components/Wrappers/PageWrapper";
 
-const Orders = () => {
+const Favorites = () => {
   return (
-    <PageWrapper title="Orders" items="0">
+    <PageWrapper title="Favorites" items="0">
       Orders
     </PageWrapper>
   );
 };
 
-export default Orders;
+export default Favorites;

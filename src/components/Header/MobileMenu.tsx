@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import ModalWrapper from "../wrappers/ModalWrapper";
+import ModalWrapper from "../Wrappers/ModalWrapper";
 import CategoryItems from "./CategoryItems";
 import UserItems from "./UserItems";
 
@@ -16,8 +16,8 @@ type MobileMenuProps = {
 
 const verticalNavItems = [
   { icon: <FiUser />, position: 1 },
-  { icon: <TbTruckDelivery />, position: 2 },
-  { icon: <TbCategory2 />, position: 3 },
+  { icon: <TbCategory2 />, position: 2 },
+  { icon: <TbTruckDelivery />, position: 3 },
 ];
 
 const MobileMenu = ({ open, setOpen }: MobileMenuProps) => {
@@ -41,7 +41,10 @@ const MobileMenu = ({ open, setOpen }: MobileMenuProps) => {
         min-h-screen bg-white text-gray-500 font-medium"
       >
         {/* vertical nav */}
-        <div className="flex flex-col border-r border-r-gray-200 py-14">
+        <div
+          className="flex flex-col border-r border-r-gray-200 py-14
+          bg-white z-[1]"
+        >
           {verticalNavItems.map(({ icon, position }) => (
             <button
               key={position}
@@ -65,84 +68,97 @@ const MobileMenu = ({ open, setOpen }: MobileMenuProps) => {
         </div>
 
         {/* 1 - account, orders, ... */}
-        {current === 1 && (
-          <div
-            className="flex-grow px-4 pt-16 pb-8 flex flex-col items-start 
-            gap-y-5"
-          >
-            <UserItems
-              itemStyles="relative w-full flex items-center gap-x-4
+        <div
+          className={
+            current === 1
+              ? `flex-grow px-4 pt-16 pb-8 flex flex-col items-start 
+                    gap-y-5 duration-200 ease-in-out`
+              : `flex-grow px-4 pt-16 pb-8 flex flex-col items-start 
+                    gap-y-5 absolute -translate-x-[100%]`
+          }
+        >
+          <UserItems
+            itemStyles="relative w-full flex items-center gap-x-4
               [&>*:not(.notif)]:hover:text-primary-blue/80"
-              activeItemStyles="relative w-full flex items-center gap-x-4
+            activeItemStyles="relative w-full flex items-center gap-x-4
               text-primary-blue/80"
-              notifStyles="absolute right-0 font-semibold text-white
+            notifStyles="absolute right-0 font-semibold text-white
               bg-red-400 text-sm rounded-full px-[6px] py-1 truncate 
               min-w-[28px] max-w-[48px] text-center notif"
-              iconStyles="text-[24px] mobileL:text-[28px] duration-300"
-              titleStyles="text-base mobileL:text-lg duration-300"
-              hideMobileMenu={closeMobileMenu}
-            />
-          </div>
-        )}
+            iconStyles="text-[24px] mobileL:text-[28px] duration-300"
+            titleStyles="text-base mobileL:text-lg duration-300"
+            hideMobileMenu={closeMobileMenu}
+          />
+        </div>
 
-        {/* 2 - welcome, location,... */}
-        {current === 2 && (
-          <div
-            className="flex-grow px-4 pt-16 pb-8 flex flex-col items-start
-              gap-y-5 text-base mobileL:text-lg"
-          >
-            <p className="font-normal">Welcome to worldwide ABC Market!</p>
-
-            <button
-              className="flex items-center gap-x-4 duration-300
-                hover:text-primary-blue"
-            >
-              <MdLocationOn
-                className="text-primary-blue text-[24px]
-                  mobileL:text-[28px]"
-              />
-              <span>Select your location</span>
-            </button>
-
-            <button
-              className="flex items-center gap-x-4 duration-300
-                hover:text-primary-blue"
-            >
-              <TbTruckDelivery
-                className="text-primary-blue text-[24px]
-                  mobileL:text-[28px]"
-              />
-              <span>Track your order</span>
-            </button>
-
-            <button
-              className="flex items-center gap-x-4 duration-300
-                hover:text-primary-blue"
-            >
-              <TbDiscount2
-                className="text-primary-blue text-[24px]
-                  mobileL:text-[28px]"
-              />
-              <span>All Offers</span>
-            </button>
-          </div>
-        )}
-
-        {/* 3 - categories */}
-        {current === 3 && (
-          <ul
-            className="flex-grow px-4 pt-16 pb-8 flex flex-col items-start 
-            gap-y-5 text-base mobileL:text-lg"
-          >
-            <CategoryItems
-              withIcon={true}
-              itemStyles="leading-[18px] whitespace-nowrap duration-300
+        {/* 2 - categories */}
+        <ul
+          className={
+            current === 2
+              ? `flex-grow px-4 pt-16 pb-8 flex flex-col items-start 
+                    gap-y-5 text-base mobileL:text-lg
+                    duration-200 ease-in-out`
+              : `flex-grow px-4 pt-16 pb-8 flex flex-col items-start 
+                    gap-y-5 text-base mobileL:text-lg
+                    absolute -translate-x-[100%]`
+          }
+        >
+          <CategoryItems
+            withIcon={true}
+            itemStyles="leading-[18px] whitespace-nowrap duration-300
               hover:text-primary-blue/80"
-              activeItemStyles="text-primary-blue/80"
-              hideMobileMenu={closeMobileMenu}
+            activeItemStyles="text-primary-blue/80"
+            hideMobileMenu={closeMobileMenu}
+          />
+        </ul>
+
+        {/* 3 - welcome, location,... */}
+        <div
+          className={
+            current === 3
+              ? `flex-grow px-4 pt-16 pb-8 flex flex-col items-start
+                    gap-y-5 text-base mobileL:text-lg
+                    duration-200 ease-in-out`
+              : `flex-grow px-4 pt-16 pb-8 flex flex-col items-start
+                    gap-y-5 text-base mobileL:text-lg
+                    absolute -translate-x-[100%]`
+          }
+        >
+          <p className="font-normal">Welcome to worldwide ABC Market!</p>
+
+          <button
+            className="flex items-center gap-x-4 duration-300
+                hover:text-primary-blue"
+          >
+            <MdLocationOn
+              className="text-primary-blue text-[24px]
+                  mobileL:text-[28px]"
             />
-          </ul>
-        )}
+            <span>Select your location</span>
+          </button>
+
+          <button
+            className="flex items-center gap-x-4 duration-300
+                hover:text-primary-blue"
+          >
+            <TbTruckDelivery
+              className="text-primary-blue text-[24px]
+                  mobileL:text-[28px]"
+            />
+            <span>Track your order</span>
+          </button>
+
+          <button
+            className="flex items-center gap-x-4 duration-300
+                hover:text-primary-blue"
+          >
+            <TbDiscount2
+              className="text-primary-blue text-[24px]
+                  mobileL:text-[28px]"
+            />
+            <span>All Offers</span>
+          </button>
+        </div>
       </ModalWrapper>
 
       {/* btn to show mobile menu */}

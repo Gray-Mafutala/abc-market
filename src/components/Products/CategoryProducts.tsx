@@ -1,9 +1,11 @@
 import { Link } from "react-router-dom";
+
 import useFetch from "../../hooks/useFetch";
 import ProductCard from "./ProductCard";
-import { IoIosArrowForward } from "react-icons/io";
-import ErrorDisplay from "../ui/ErrorDisplay";
+import FetchDataErrorDisplay from "../UI/FetchDataErrorDisplay";
 import SkeletonProductCard from "./SkeletonProductCard";
+
+import { IoIosArrowForward } from "react-icons/io";
 
 type CategoryProductsProps = {
   titlePrefix: string;
@@ -15,13 +17,6 @@ const CategoryProducts = ({ titlePrefix, category }: CategoryProductsProps) => {
   const { data, isLoading, error } = useFetch<ProductType[]>(
     `${baseURL}/${category}?limit=4`
   );
-
-  // if an error has occurred
-  if (error)
-    return <ErrorDisplay msg={`An error has occurred: ${error.message}`} />;
-
-  //  // isLoading
-  //  if (isLoading) return <Loader />;
 
   return (
     <section id={category} className="flex flex-col gap-y-10">
@@ -54,11 +49,15 @@ const CategoryProducts = ({ titlePrefix, category }: CategoryProductsProps) => {
         </Link>
       </header>
 
-      {/* if isLoading===true, then show Skeleton loading... */}
+      {/* body */}
+      {/* A - if an error has occurred */}
+      {error && <FetchDataErrorDisplay msg={error.message} />}
+
+      {/* B - if isLoading===true, then show Skeleton loading... */}
       {isLoading && (
         <ul
-          className="grid grid-cols-1 gap-y-8 gap-x-6 mobileXL:grid-cols-2 
-            tabletM:grid-cols-3 laptop:grid-cols-4"
+          className="grid grid-cols-1 gap-y-8 gap-x-6 mobileXL:grid-cols-2
+          tabletM:grid-cols-3 laptop:grid-cols-4"
         >
           <SkeletonProductCard />
           <SkeletonProductCard />
@@ -67,12 +66,12 @@ const CategoryProducts = ({ titlePrefix, category }: CategoryProductsProps) => {
         </ul>
       )}
 
-      {/* if isLoading===false, then show first 4 products
+      {/* C - if isLoading===false, then show first 4 products
             (ProductCard) of this category */}
       {!isLoading && (
         <ul
-          className="grid grid-cols-1 gap-y-8 gap-x-6 mobileXL:grid-cols-2 
-        tabletM:grid-cols-3 laptop:grid-cols-4"
+          className="grid grid-cols-1 gap-y-8 gap-x-6 mobileXL:grid-cols-2
+          tabletM:grid-cols-3 laptop:grid-cols-4"
         >
           {data !== undefined &&
             data.map((product) => (
