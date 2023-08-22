@@ -54,10 +54,9 @@ const LoginForm = () => {
 
         {/* btn to submit */}
         <button
-                  className="mt-2 py-2 px-5 rounded-3xl text-base mobileM:text-lg
-          font-medium
-          bg-primary-blue/80 text-white border-2 border-transparent
-          hover:bg-white hover:text-primary-blue/80
+          className="mt-2 py-2 px-5 rounded-3xl text-base mobileM:text-lg
+          font-medium bg-primary-blue/80 text-white border-2 
+          border-transparent hover:bg-white hover:text-primary-blue/80
           hover:border-primary-blue/80 active:bg-blue-light 
           active:text-primary-blue duration-300"
         >
