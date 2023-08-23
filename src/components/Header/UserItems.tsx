@@ -1,15 +1,15 @@
 import { NavLink } from "react-router-dom";
 
 import { HiOutlineHeart } from "react-icons/hi";
-import { FiShoppingCart, FiUser } from "react-icons/fi";
+import { FiUser } from "react-icons/fi";
 
 import { BiSolidPackage } from "react-icons/bi";
+import ShoppingCart from "../ShoppingCart";
 
 const userItems = [
   { title: "Account", link: "/account", icon: <FiUser /> },
   { title: "Orders", link: "/orders", icon: <BiSolidPackage /> },
   { title: "Favorites", link: "/favorites", icon: <HiOutlineHeart /> },
-  { title: "Cart", link: "/cart", icon: <FiShoppingCart /> },
 ];
 
 type UserItemsProps = {
@@ -18,6 +18,8 @@ type UserItemsProps = {
   notifStyles: string;
   iconStyles: string;
   titleStyles: string;
+  shoppingCartIsOpen: boolean;
+  setOpenShoppingCart: React.Dispatch<React.SetStateAction<boolean>>;
   hideMobileMenu?: () => void;
 };
 
@@ -27,6 +29,8 @@ const UserItems = ({
   notifStyles,
   iconStyles,
   titleStyles,
+  shoppingCartIsOpen,
+  setOpenShoppingCart,
   hideMobileMenu,
 }: UserItemsProps) => {
   return (
@@ -45,6 +49,13 @@ const UserItems = ({
           <span className={titleStyles}>{title}</span>
         </NavLink>
       ))}
+
+      <ShoppingCart
+        open={shoppingCartIsOpen}
+        setOpen={setOpenShoppingCart}
+        hideMobileMenu={hideMobileMenu}
+        cartBtnStyles={{ itemStyles, notifStyles, iconStyles, titleStyles }}
+      />
     </>
   );
 };

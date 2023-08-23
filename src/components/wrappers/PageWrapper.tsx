@@ -20,7 +20,7 @@ const PageWrapper = ({ title, items, children }: PageWrapperProps) => {
             {title}
           </h2>
 
-          {/*  */}
+          {/* items count */}
           <p className="text-sm font-semibold text-slate-400 whitespace-nowrap">
             {items}
           </p>

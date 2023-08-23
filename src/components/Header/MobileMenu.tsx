@@ -12,6 +12,8 @@ import { MdLocationOn } from "react-icons/md";
 type MobileMenuProps = {
   open: boolean;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  shoppingCartIsOpen: boolean;
+  setOpenShoppingCart: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 const verticalNavItems = [
@@ -20,7 +22,12 @@ const verticalNavItems = [
   { icon: <TbTruckDelivery />, position: 3 },
 ];
 
-const MobileMenu = ({ open, setOpen }: MobileMenuProps) => {
+const MobileMenu = ({
+  open,
+  setOpen,
+  shoppingCartIsOpen,
+  setOpenShoppingCart,
+}: MobileMenuProps) => {
   const [current, setCurrent] = useState(1);
   const showMobileMenu = () => setOpen(true);
   const closeMobileMenu = () => setOpen(false);
@@ -37,8 +44,9 @@ const MobileMenu = ({ open, setOpen }: MobileMenuProps) => {
             : "inset-0 -translate-x-[100%] duration-300"
         }
         closeBtnAddStyles="top-3 right-3 mobileM:-right-10"
-        innerWrapperStyles="relative flex justify-between max-w-[400px] 
-        min-h-screen bg-white text-gray-500 font-medium"
+        innerWrapperStyles="relative w-full mobileM:max-w-[400px] 
+        min-h-screen flex justify-between bg-white text-gray-500
+        font-medium"
       >
         {/* vertical nav */}
         <div
@@ -81,13 +89,15 @@ const MobileMenu = ({ open, setOpen }: MobileMenuProps) => {
             itemStyles="relative w-full flex items-center gap-x-4
               [&>*:not(.notif)]:hover:text-primary-blue/80"
             activeItemStyles="relative w-full flex items-center gap-x-4
-              text-primary-blue/80"
+            text-primary-blue/80"
             notifStyles="absolute right-0 font-semibold text-white
               bg-red-400 text-sm rounded-full px-[6px] py-1 truncate 
               min-w-[28px] max-w-[48px] text-center notif"
             iconStyles="text-[24px] mobileL:text-[28px] duration-300"
             titleStyles="text-base mobileL:text-lg duration-300"
             hideMobileMenu={closeMobileMenu}
+            setOpenShoppingCart={setOpenShoppingCart}
+            shoppingCartIsOpen={shoppingCartIsOpen}
           />
         </div>
 

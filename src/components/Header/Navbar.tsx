@@ -4,15 +4,12 @@ import { Link } from "react-router-dom";
 import MobileMenu from "./MobileMenu";
 import SearchBar from "./SearchBar";
 import MobileSearchBar from "./MobileSearchBar";
-
-//import { HiOutlineHeart } from "react-icons/hi";
-//import { FiUser, FiShoppingCart } from "react-icons/fi";
-//import { BiSolidPackage } from "react-icons/bi";
 import UserItems from "./UserItems";
 
 const Navbar = () => {
   const [mobileSearchBox, setMobileSearchBox] = useState(false);
   const [mobileMenu, setMobileMenu] = useState(false);
+  const [shoppingCart, setShoppingCart] = useState(false);
 
   return (
     <nav className="px-4 bg-white border-b border-b-[#ededed]">
@@ -23,13 +20,18 @@ const Navbar = () => {
       >
         {/* left content - logo and menu btn */}
         <div className="flex items-center gap-x-4">
-          <MobileMenu open={mobileMenu} setOpen={setMobileMenu} />
+          <MobileMenu
+            open={mobileMenu}
+            setOpen={setMobileMenu}
+            setOpenShoppingCart={setShoppingCart}
+            shoppingCartIsOpen={shoppingCart}
+          />
 
-          <h1 className="text-2xl text-primary-blue/80 font-bold 
-            duration-300 hover:opacity-80 whitespace-nowrap">
-            <Link
-              to="/"
-            >
+          <h1
+            className="text-2xl text-primary-blue/80 font-bold 
+            duration-300 hover:opacity-80 whitespace-nowrap"
+          >
+            <Link to="/">
               ABC <span className="text-slate-400">Market</span>
             </Link>
           </h1>
@@ -57,6 +59,8 @@ const Navbar = () => {
             px-[6px] truncate min-w-[28px] max-w-[36px] notif"
             iconStyles="text-2xl duration-300"
             titleStyles="duration-300"
+            setOpenShoppingCart={setShoppingCart}
+            shoppingCartIsOpen={shoppingCart}
           />
         </div>
 
