@@ -127,7 +127,7 @@ const ShoppingCart = ({
             <button
               onClick={clearCart}
               title="Clear shopping cart"
-              className="hover:text-primary-blue duration-300 px-1"
+              className="hover:text-primary-blue duration-200 px-1"
             >
               <RiDeleteBinFill size={24} />
             </button>
@@ -152,10 +152,10 @@ const ShoppingCart = ({
             ref={rootWrapper}
             className={
               isVisible
-                ? `border max-h-[420px] overflow-y-auto flex flex-col gap-y-4 pr-4
-                    scrollbar-w-2`
-                : `border max-h-[420px] overflow-y-auto flex flex-col gap-y-4 pr-4
-                    scrollbar-w-2 shadow-[-8px_-16px_14px_-16px#00000073_inset]`
+                ? `max-h-[420px] overflow-y-auto flex flex-col gap-y-6 pr-4
+                    overflow-x-hidden scrollbar-w-2`
+                : `max-h-[420px] overflow-y-auto flex flex-col gap-y-6 pr-4
+                    overflow-x-hidden scrollbar-w-2 shadow-[-8px_-16px_14px_-16px#00000073_inset]`
             }
           >
             {cartItems.map((item) => (
