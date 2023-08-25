@@ -19,7 +19,7 @@ const ShoppingCartItem = ({
   image,
 }: ShoppingCartItemProps) => {
   return (
-    <li className="flex justify-between gap-x-4">
+    <li className="flex flex-col gap-y-2 mobileM:flex-row justify-between gap-x-4">
       {/* left content - checkbox, image, title... */}
       <div className="flex gap-x-3">
         {/* checkbox, image */}
@@ -27,13 +27,16 @@ const ShoppingCartItem = ({
           <img
             src={image}
             alt={title}
-            className="border p-1 rounded-md min-w-[64px] w-16 min-h-[96px] h-16 object-contain"
+            className="border p-1 rounded-md object-contain
+            w-24 h-20 min-w-[96px] min-h-[80px]
+            mobileM:min-w-[64px] mobileM:w-16 mobileM:min-h-[96px]
+            mobileM:h-24 "
           />
         </div>
 
         {/* title and free-ship or discount */}
         <div className="flex flex-col justify-between">
-          <p className="line-clamp-2 max-w-[140px] w-full">{title}</p>
+          <p className="line-clamp-2 mobileM:max-w-[140px] w-full">{title}</p>
           {hasADiscount ? (
             <span
               className="flex items-center gap-x-2 px-2 py-1 text-sm
@@ -56,14 +59,21 @@ const ShoppingCartItem = ({
         </div>
       </div>
 
-      {/* price and component AddToCartManager */}
-      <div className="border-l pl-4 flex-grow flex flex-col justify-between">
-        <p className="flex flex-col">
-          <span className="font-bold text-slate-700">{price}</span>
-
+      {/* right content - price and component AddToCartManager */}
+      <div
+        className="flex-grow flex justify-between mobileM:flex-col mobileM:border-l 
+        mobileM:pl-4"
+      >
+        <p
+          className="min-w-[96px] text-center flex justify-center
+          gap-x-2 items-center mobileM:flex-col mobileM:items-start
+          mobileM:justify-start"
+        >
           {hasADiscount && (
-            <span className="text-sm line-through">{priceBeforeDiscount}</span>
+            <span className="text-sm line-through">${priceBeforeDiscount}</span>
           )}
+
+          <span className="text-lg font-bold text-slate-600">${price}</span>
         </p>
 
         <AddToCartManager />
