@@ -22,6 +22,10 @@ input[type=search]::-ms-reveal {
     height: 0
 }
 
+a{
+    user-select: none;
+}
+
 @layer base {
     body {
         @apply font-hk-grotesk

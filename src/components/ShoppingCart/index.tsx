@@ -106,7 +106,7 @@ const ShoppingCart = ({
         {/* header - title and btn to clear shopping cart */}
         <header
           className="flex items-center justify-between border-b
-        border-b-[#ededed] pb-3 mobileM:pb-1"
+            border-b-[#ededed] pb-3 mobileM:pb-1"
         >
           <h1
             className="text-2xl mobileL:text-3xl text-slate-500
@@ -146,35 +146,77 @@ const ShoppingCart = ({
         )}
 
         {/* if shopping cart contains items */}
-
         {cartSumItemsQty > 0 && (
-          <ul
-            ref={rootWrapper}
-            className={
-              isVisible
-                ? `max-h-[420px] overflow-y-auto flex flex-col gap-y-6 pr-4
-                    overflow-x-hidden scrollbar-w-2`
-                : `max-h-[420px] overflow-y-auto flex flex-col gap-y-6 pr-4
-                    overflow-x-hidden scrollbar-w-2 shadow-[-8px_-16px_14px_-16px#00000073_inset]`
-            }
-          >
-            {cartItems.map((item) => (
-              <ShoppingCartItem
-                key={item.id}
-                id={item.id}
-                title={item.title}
-                image={item.image}
-                price={item.price}
-                hasADiscount={hasADiscount()}
-                priceBeforeDiscount={100}
-              />
-            ))}
+          <>
+            <ul
+              ref={rootWrapper}
+              className={
+                isVisible
+                  ? `max-h-[280px] overflow-y-auto flex flex-col gap-y-6 
+                    pr-4 overflow-x-hidden scrollbar-w-2 relative`
+                  : `max-h-[280px] overflow-y-auto flex flex-col gap-y-6 
+                    pr-4 overflow-x-hidden scrollbar-w-2 relative
+                    shadow-[-8px_-16px_14px_-16px#00000073_inset]`
+              }
+            >
+              {cartItems.map((item) => (
+                <ShoppingCartItem
+                  key={item.id}
+                  id={item.id}
+                  title={item.title}
+                  image={item.image}
+                  price={item.price}
+                  hasADiscount={hasADiscount()}
+                  priceBeforeDiscount={100}
+                />
+              ))}
 
-            {/* watcher for intersection observer */}
-            <li ref={watcherRef}>
-              {/*{isVisible ? "INTERSECTE" : "PAS ENCORE"}*/}
-            </li>
-          </ul>
+              {/* watcher for intersection observer */}
+              <li ref={watcherRef}></li>
+            </ul>
+
+            {/* subtotal, shipping... and btn to place order */}
+            <div className="pt-4 border-t border-t-[#ededed] flex flex-col">
+              {/* subtotal */}
+              <p className="flex items-center justify-between gap-x-8">
+                <span className="text">Subtotal</span>
+                <span className="font-bold text-slate-700">$188</span>
+              </p>
+
+              {/* shipping */}
+              <p
+                className="flex items-center justify-between gap-x-8
+                mt-2 mb-4"
+              >
+                <span className="text">Shipping</span>
+                <span className="font-bold text-slate-700">--</span>
+              </p>
+
+              {/* total to pay */}
+              <p
+                className="flex items-center justify-between gap-x-8
+                pt-6 border-t border-t-[#ededed]"
+              >
+                <span className="text-xl font-semibold text-slate-600">
+                  Total
+                </span>
+                <span className="text-2xl font-bold text-slate-700">
+                  ${cartTotalPrice}
+                </span>
+              </p>
+
+              <button
+                className="mt-4 px-5 py-[6px] rounded-md text-white
+                bg-primary-blue text-lg font-medium border-2
+                border-transparent hover:text-primary-blue
+                hover:bg-white hover:border-primary-blue
+                active:bg-primary-blue active:text-white 
+                duration-200"
+              >
+                Place a order
+              </button>
+            </div>
+          </>
         )}
       </ModalWrapper>
 
