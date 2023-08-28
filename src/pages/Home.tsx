@@ -1,4 +1,5 @@
 import CategoryProducts from "../components/Products/CategoryProducts";
+import CustomerX from "../components/Sections/CustomerX";
 import SlidingBannerAds from "../components/Sections/SlidingBannerAds";
 
 const sliders = [
@@ -34,6 +35,9 @@ const Home = () => {
 
         {/* Electronics products */}
         <CategoryProducts titlePrefix="The best on" category="electronics" />
+
+        {/* Customer Experiences section */}
+        <CustomerX />
 
         {/* Jewelery products */}
         <CategoryProducts titlePrefix="Top" category="jewelery" />
