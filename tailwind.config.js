@@ -8,6 +8,7 @@ export default {
         grey: "#666",
         "off-white": "#f5f5f5",
         "blue-light": "#f3f9fb",
+        "gray-border": "#ededed",
       },
 
       fontFamily: {
@@ -15,7 +16,7 @@ export default {
       },
 
       animation: {
-        "shine": "shine 1.8s linear infinite",
+        shine: "shine 1.8s linear infinite",
       },
 
       keyframes: {
