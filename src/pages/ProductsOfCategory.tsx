@@ -1,10 +1,12 @@
 import { useParams } from "react-router-dom";
+import { useEffect } from "react";
+
 import useFetch from "../hooks/useFetch";
 import SkeletonProductCard from "../components/Products/SkeletonProductCard";
 import ProductCard from "../components/Products/ProductCard";
 import FetchDataErrorDisplay from "../components/UI/FetchDataErrorDisplay";
-import { useEffect } from "react";
 import PageWrapper from "../components/Wrappers/PageWrapper";
+import CustomerX from "../components/Sections/CustomerX";
 
 const ProductsOfCategory = () => {
   const { category } = useParams();
@@ -14,7 +16,7 @@ const ProductsOfCategory = () => {
     `${baseURL}/${category}`
   );
 
-  useEffect(() => window.scrollTo(0, 0), []);
+  useEffect(() => window.scrollTo(0, 0), [category]);
 
   const categoryTitle =
     category !== undefined
@@ -60,6 +62,9 @@ const ProductsOfCategory = () => {
             ))}
         </ul>
       )}
+
+      {/* Customer Experiences section */}
+      <CustomerX />
     </PageWrapper>
   );
 };

@@ -4,21 +4,25 @@ import { MdFiberNew } from "react-icons/md";
 
 const customerExperiences = [
   {
+    id: "01",
     icon: <TbBrandCashapp />,
     title: "Original Products",
     info: "We provide money back guarantee if the product are not original",
   },
   {
+    id: "02",
     icon: <PiMaskHappy />,
     title: "Satisfation Guarantee",
     info: "Exchange the product you've purchased if it doesn't fit on you",
   },
   {
+    id: "03",
     icon: <MdFiberNew />,
     title: "New Arrival Everyday",
     info: "We updates our collections almost everyday",
   },
   {
+    id: "04",
     icon: <TbTruckDelivery />,
     title: "Fast & Free Shipping",
     info: "We offer fast and free shipping for our loyal customers",
@@ -38,10 +42,11 @@ const CustomerX = () => {
 
       <div
         className="grid grid-cols-1 mobileM:grid-cols-2 tabletM:grid-cols-4
-      gap-8"
+        gap-8"
       >
-        {customerExperiences.map(({ icon, title, info }) => (
+        {customerExperiences.map(({ id, icon, title, info }) => (
           <div
+            key={id}
             className="flex flex-col items-center mobileM:items-start
             text-center mobileM:text-left"
           >

@@ -14,9 +14,7 @@ const PageWrapper = ({ title, items, children }: PageWrapperProps) => {
         {/* header */}
         <header className="flex items-center gap-x-3">
           {/* title */}
-          <h2
-            className="text-2xl mobileL:text-3xl text-slate-500 font-bold"
-          >
+          <h2 className="text-2xl mobileL:text-3xl text-slate-500 font-bold">
             {title}
           </h2>
 
@@ -26,8 +24,13 @@ const PageWrapper = ({ title, items, children }: PageWrapperProps) => {
           </p>
         </header>
 
-        {/* body  */}
-        {children}
+        {/* body */}
+        <div
+          className="flex flex-col gap-y-12 mobileL:gap-y-16 tablet:gap-20
+          laptop:gap-y-32"
+        >
+          {children}
+        </div>
       </div>
     </main>
   );

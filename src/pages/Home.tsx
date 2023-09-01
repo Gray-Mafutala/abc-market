@@ -36,9 +36,6 @@ const Home = () => {
         {/* Electronics products */}
         <CategoryProducts titlePrefix="The best on" category="electronics" />
 
-        {/* Customer Experiences section */}
-        <CustomerX />
-
         {/* Jewelery products */}
         <CategoryProducts titlePrefix="Top" category="jewelery" />
 
@@ -53,6 +50,9 @@ const Home = () => {
           titlePrefix="Enjoy discounts on"
           category="women's clothing"
         />
+
+        {/* Customer Experiences section */}
+        <CustomerX />
       </div>
     </main>
   );
