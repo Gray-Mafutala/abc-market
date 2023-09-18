@@ -25,11 +25,11 @@ const sliders = [
 
 const Home = () => {
   return (
-    <main className="px-4 pt-8 pb-32 bg-slate-50">
+    <main className="common-main-container-styles">
       {/* center inner wrapper */}
       <div
         className="centered-container flex flex-col gap-y-12
-        mobileL:gap-y-16 tablet:gap-20 laptop:gap-y-32"
+        mobileL:gap-y-16 tablet:gap-20"
       >
         <SlidingBannerAds sliders={sliders} />
 

@@ -8,7 +8,7 @@ import FetchDataErrorDisplay from "../components/UI/FetchDataErrorDisplay";
 import PageWrapper from "../components/Wrappers/PageWrapper";
 import CustomerX from "../components/Sections/CustomerX";
 
-const ProductsOfCategory = () => {
+const CategoryProducts = () => {
   const { category } = useParams();
 
   const baseURL = "https://fakestoreapi.com/products/category";
@@ -69,4 +69,4 @@ const ProductsOfCategory = () => {
   );
 };
 
-export default ProductsOfCategory;
+export default CategoryProducts;

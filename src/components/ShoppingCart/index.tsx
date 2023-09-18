@@ -36,7 +36,7 @@ const ShoppingCart = ({
     root: rootWrapper.current,
     threshold: 1,
   };
-  const [watcherRef, isVisible] = useIntersectionObserver(options);
+  const [observerRef, isIntersecting] = useIntersectionObserver(options);
 
   // en attendant de developper le contexte
   const closeShoppingCart = () => setOpen(false);
@@ -151,7 +151,7 @@ const ShoppingCart = ({
             <ul
               ref={rootWrapper}
               className={
-                isVisible
+                isIntersecting
                   ? `max-h-[280px] overflow-y-auto flex flex-col gap-y-6 
                     pr-4 overflow-x-hidden scrollbar-w-2 relative`
                   : `max-h-[280px] overflow-y-auto flex flex-col gap-y-6 
@@ -172,7 +172,7 @@ const ShoppingCart = ({
               ))}
 
               {/* watcher for intersection observer */}
-              <li ref={watcherRef}></li>
+              <li ref={observerRef}></li>
             </ul>
 
             {/* subtotal, shipping... and btn to place order */}

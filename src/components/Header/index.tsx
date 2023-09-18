@@ -4,7 +4,7 @@ import Navbar from "./Navbar";
 import WelcomeTopBar from "./WelcomeTopBar";
 
 const Header = () => {
-  const [watcherRef, isIntersecting] = useIntersectionObserver();
+  const [observerRef, isIntersecting] = useIntersectionObserver();
 
   return (
     <>
@@ -24,7 +24,7 @@ const Header = () => {
         <Navbar />
 
         {/* watcher to show nav-sticky */}
-        <div ref={watcherRef}></div>
+        <div ref={observerRef}></div>
 
         <CategoriesBottomBar />
       </header>

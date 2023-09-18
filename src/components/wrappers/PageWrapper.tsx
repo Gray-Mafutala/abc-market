@@ -8,7 +8,7 @@ type PageWrapperProps = {
 
 const PageWrapper = ({ title, items, children }: PageWrapperProps) => {
   return (
-    <main className="px-4 pt-8 pb-32 bg-slate-50">
+    <main className="common-main-container-styles">
       {/* center inner wrapper */}
       <div className="centered-container flex flex-col gap-y-6">
         {/* header */}
@@ -26,8 +26,7 @@ const PageWrapper = ({ title, items, children }: PageWrapperProps) => {
 
         {/* body */}
         <div
-          className="flex flex-col gap-y-12 mobileL:gap-y-16 tablet:gap-20
-          laptop:gap-y-32"
+          className="flex flex-col gap-6"
         >
           {children}
         </div>

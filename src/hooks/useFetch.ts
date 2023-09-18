@@ -1,17 +1,16 @@
 import { useEffect, useState } from "react";
 
 interface State<T> {
-    data?: T
-    isLoading:boolean
-    error?: Error
-  }
+  data?: T;
+  isLoading: boolean;
+  error?: Error;
+}
 
-const useFetch = <T= unknown>(url: string):State<T> => {
+const useFetch = <T = unknown>(url: string): State<T> => {
   const [data, setData] = useState<T>([] as T);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState();
 
-    
   useEffect(() => {
     fetch(url)
       .then((data) => data.json())
@@ -26,7 +25,7 @@ const useFetch = <T= unknown>(url: string):State<T> => {
       });
   }, [url]);
 
-    return { data, isLoading, error };
+  return { data, isLoading, error };
 };
 
 export default useFetch;

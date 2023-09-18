@@ -3,8 +3,8 @@ import { useRoutes } from "react-router-dom";
 import RequireAuth from "../components/Features/RequireAuth";
 
 const Home = React.lazy(() => import("../pages/Home"));
-const ProductsOfCategory = React.lazy(
-  () => import("../pages/ProductsOfCategory")
+const CategoryProducts = React.lazy(
+  () => import("../pages/CategoryProducts")
 );
 const Orders = React.lazy(() => import("../pages/Orders"));
 const Favorites = React.lazy(() => import("../pages/Favorites"));
@@ -16,12 +16,12 @@ const Routing = () => {
 
     {
       path: "/",
-      element: <ProductsOfCategory />,
+      element: <CategoryProducts />,
       children: [
-        { path: "products", element: <ProductsOfCategory /> },
+        { path: "products", element: <CategoryProducts /> },
         {
           path: "products/category/:category",
-          element: <ProductsOfCategory />,
+          element: <CategoryProducts />,
         },
       ],
     },

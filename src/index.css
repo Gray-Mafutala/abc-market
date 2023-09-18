@@ -36,6 +36,10 @@ a{
     .centered-container {
         @apply max-w-[1200px] mx-auto
     }
+
+    .common-main-container-styles{
+        @apply px-4 pt-8 pb-24 bg-slate-50
+    }
 }
 
 @layer utilities {

@@ -20,14 +20,14 @@ const Footer = () => {
               className="text-2xl text-primary-blue/80 font-bold 
               duration-300 hover:opacity-80 whitespace-nowrap"
             >
-              <Link to="/">
+              <Link to="/" onClick={() => window.scrollTo(0, 0)}>
                 ABC <span className="text-slate-400">Market</span>
               </Link>
             </h1>
 
             <p className="text-center tabletM:text-left tabletM:max-w-xs">
               Specializes in providing high-quality stylish and unique jewelry
-              products
+              products.
             </p>
           </div>
 
