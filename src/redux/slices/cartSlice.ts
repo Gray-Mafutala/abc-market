@@ -8,11 +8,11 @@ const cartSlice = createSlice({
   },
 
   reducers: {
-    addProduct: (state, action) => {},
-    increaseItemQty: (state, action) => {},
-    decreaseItemQty: (state, action) => {},
-    removeProduct: (state, action) => {},
-    clearCart: (state, action) => {},
+    //addProduct: (state, action) => {},
+    //increaseItemQty: (state, action) => {},
+    //decreaseItemQty: (state, action) => {},
+    //removeProduct: (state, action) => {},
+    //clearCart: (state, action) => {},
   },
 });
 

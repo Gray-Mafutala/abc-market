@@ -5,10 +5,10 @@ const favoritesSlice = createSlice({
   initialState: [],
 
   reducers: {
-    addFavorite: (state, action) => {},
-    removeFavorite: (state, action) => {},
-    toggleFavorite: (state, action) => {},
-    clearFavorites: (state, action) => {},
+    //addFavorite: (state, action) => {},
+    //removeFavorite: (state, action) => {},
+    //toggleFavorite: (state, action) => {},
+    //clearFavorites: (state, action) => {},
   },
 });
 
