@@ -49,8 +49,8 @@ const ProductCard = ({
       {/* like btn */}
       <button
         className="absolute top-2 right-2 bg-blue-light rounded-full
-          p-1 text-slate-300 hover:text-rose-400 active:animate-ping
-          duration-500 ease-out"
+        p-1 text-slate-300 hover:text-rose-400 active:animate-ping
+        duration-500 ease-out"
       >
         <HiHeart size={20} />
       </button>

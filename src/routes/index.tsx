@@ -1,29 +1,21 @@
 import React from "react";
 import { useRoutes } from "react-router-dom";
-import RequireAuth from "../components/Features/RequireAuth";
+import RequireAuth from "../features/RequireAuth";
 
 const Home = React.lazy(() => import("../pages/Home"));
-const CategoryProducts = React.lazy(
-  () => import("../pages/CategoryProducts")
-);
+const CategoryProducts = React.lazy(() => import("../pages/CategoryProducts"));
 const Orders = React.lazy(() => import("../pages/Orders"));
 const Favorites = React.lazy(() => import("../pages/Favorites"));
-const Account = React.lazy(() => import("../pages/Account"));
+const UserAccount = React.lazy(() => import("../pages/UserAccount"));
+const Login = React.lazy(() => import("../pages/Login"));
 
 const Routing = () => {
   const routes = useRoutes([
     { path: "/", element: <Home /> },
 
     {
-      path: "/",
+      path: "products/category/:category",
       element: <CategoryProducts />,
-      children: [
-        { path: "products", element: <CategoryProducts /> },
-        {
-          path: "products/category/:category",
-          element: <CategoryProducts />,
-        },
-      ],
     },
 
     {
@@ -46,13 +38,14 @@ const Routing = () => {
 
     {
       path: "/account",
-
       element: (
         <RequireAuth>
-          <Account />,
+          <UserAccount />
         </RequireAuth>
       ),
-    },
+      },
+    
+      { path: "/login", element: <Login /> },
   ]);
 
   return routes;

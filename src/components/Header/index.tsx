@@ -1,10 +1,13 @@
+import { useRef } from "react";
 import useIntersectionObserver from "../../hooks/useIntersectionObserver";
 import CategoriesBottomBar from "./CategoriesBottomBar";
 import Navbar from "./Navbar";
 import WelcomeTopBar from "./WelcomeTopBar";
 
 const Header = () => {
-  const [observerRef, isIntersecting] = useIntersectionObserver();
+  const observerRef = useRef<HTMLDivElement | null>(null);
+  const entry = useIntersectionObserver(observerRef, {});
+  const isIntersecting = !!entry?.isIntersecting;
 
   return (
     <>

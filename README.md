@@ -1,3 +1,3 @@
-# React + TypeScript + Vite
+# ABC Market
 
-ABC Market
+This is a portfolio project... ABC Market

@@ -22,7 +22,7 @@ input[type=search]::-ms-reveal {
     height: 0
 }
 
-a{
+a {
     user-select: none;
 }
 
@@ -37,7 +37,7 @@ a{
         @apply max-w-[1200px] mx-auto
     }
 
-    .common-main-container-styles{
+    .common-main-container-styles {
         @apply px-4 pt-8 pb-24 bg-slate-50
     }
 }

@@ -24,10 +24,14 @@ const CategoryProducts = () => {
       : "";
 
   return (
-    <PageWrapper title={categoryTitle} items={`${data?.length} products`}>
+    <PageWrapper
+      title={categoryTitle}
+      items={`${data?.length} products`}
+      bodyContentStyles="flex flex-col gap-y-12 mobileL:gap-y-16 
+      tablet:gap-20"
+    >
       {/* A - if an error has occurred */}
       {error && <FetchDataErrorDisplay msg={error.message} />}
-
       {/* B - if isLoading===true, then show Skeleton loading... */}
       {isLoading && (
         <ul
@@ -40,7 +44,6 @@ const CategoryProducts = () => {
           <SkeletonProductCard />
         </ul>
       )}
-
       {/* C - if isLoading===false, then show first 4 products
             (ProductCard) of this category */}
       {!isLoading && (
@@ -63,7 +66,7 @@ const CategoryProducts = () => {
         </ul>
       )}
 
-      {/* Customer Experiences section */}
+      {/* ...customer experiences */}
       <CustomerX />
     </PageWrapper>
   );

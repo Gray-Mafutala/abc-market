@@ -2,10 +2,7 @@ const PageLoader = () => {
   return (
     <span className="mt-8 mb-20 text-center flex justify-center">
       <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="32"
-        height="32"
-        stroke="#008ecc"
+        className="w-8 h-8 stroke-primary-blue"
         viewBox="0 0 24 24"
       >
         <g>

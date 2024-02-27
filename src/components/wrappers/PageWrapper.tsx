@@ -4,9 +4,15 @@ type PageWrapperProps = {
   title: string;
   items: string;
   children: React.ReactNode;
+  bodyContentStyles?: string;
 };
 
-const PageWrapper = ({ title, items, children }: PageWrapperProps) => {
+const PageWrapper = ({
+  title,
+  items,
+  bodyContentStyles = "",
+  children,
+}: PageWrapperProps) => {
   return (
     <main className="common-main-container-styles">
       {/* center inner wrapper */}
@@ -25,11 +31,7 @@ const PageWrapper = ({ title, items, children }: PageWrapperProps) => {
         </header>
 
         {/* body */}
-        <div
-          className="flex flex-col gap-6"
-        >
-          {children}
-        </div>
+        <div className={bodyContentStyles}>{children}</div>
       </div>
     </main>
   );

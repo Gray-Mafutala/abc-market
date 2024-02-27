@@ -1,5 +1,14 @@
 import { initializeApp } from "firebase/app";
-import { getAuth } from "firebase/auth";
+import {
+  getAuth,
+  signInWithEmailAndPassword,
+  signOut,
+  onAuthStateChanged,
+  Unsubscribe,
+  User,
+  UserCredential,
+} from "firebase/auth";
+import { FirebaseError } from "@firebase/util";
 import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
@@ -11,6 +20,16 @@ const firebaseConfig = {
   appId: import.meta.env.VITE_FIREBASE_APP_ID,
 };
 
-export const firebase = initializeApp(firebaseConfig);
-export const auth = getAuth(firebase);
-export const firestore = getFirestore(firebase);
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const firestore = getFirestore(app);
+
+export {
+  auth,
+  firestore,
+  onAuthStateChanged,
+  signInWithEmailAndPassword,
+  signOut,
+  FirebaseError,
+};
+export type { Unsubscribe, UserCredential, User };

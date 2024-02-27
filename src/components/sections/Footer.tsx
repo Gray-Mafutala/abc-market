@@ -115,7 +115,7 @@ const Footer = () => {
           className="font-medium text-center relative before:block 
           border-t border-t-gray-300 pt-4"
         >
-          © 2022 All rights reserved. Reliance Retail Ltd.
+          © 2024 All rights reserved. ABC-Market Ltd.
         </p>
       </div>
     </footer>

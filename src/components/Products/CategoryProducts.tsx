@@ -6,6 +6,7 @@ import FetchDataErrorDisplay from "../UI/FetchDataErrorDisplay";
 import SkeletonProductCard from "./SkeletonProductCard";
 
 import { IoIosArrowForward } from "react-icons/io";
+import { ProductType } from "../../models";
 
 type CategoryProductsProps = {
   titlePrefix: string;

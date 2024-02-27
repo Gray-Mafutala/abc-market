@@ -1,10 +1,12 @@
 import React, { useRef } from "react";
+import useIntersectionObserver from "../../hooks/useIntersectionObserver";
+
 import ModalWrapper from "../Wrappers/ModalWrapper";
+import ShoppingCartItem from "./ShoppingCartItem";
+
 import { FiShoppingCart } from "react-icons/fi";
 import { RiDeleteBinFill } from "react-icons/ri";
 import { LiaOpencart } from "react-icons/lia";
-import useIntersectionObserver from "../../hooks/useIntersectionObserver";
-import ShoppingCartItem from "./ShoppingCartItem";
 
 type ShoppingCartProps = {
   open: boolean;
@@ -32,11 +34,12 @@ const ShoppingCart = ({
   /* to add a shadow to indicate that there are more items at the bottom, 
   and when we scroll to the bottom of the list, we remove the shadow */
   const rootWrapper = useRef(null);
-  const options = {
+  const observerRef = useRef<HTMLLIElement | null>(null);
+  const entry = useIntersectionObserver(observerRef, {
     root: rootWrapper.current,
     threshold: 1,
-  };
-  const [observerRef, isIntersecting] = useIntersectionObserver(options);
+  });
+  const isIntersecting = !!entry?.isIntersecting;
 
   // en attendant de developper le contexte
   const closeShoppingCart = () => setOpen(false);
