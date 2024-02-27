@@ -7,6 +7,7 @@ import ProductCard from "../components/Products/ProductCard";
 import FetchDataErrorDisplay from "../components/UI/FetchDataErrorDisplay";
 import PageWrapper from "../components/Wrappers/PageWrapper";
 import CustomerX from "../components/Sections/CustomerX";
+import { ProductType } from "../models";
 
 const CategoryProducts = () => {
   const { category } = useParams();
