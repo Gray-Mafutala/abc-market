@@ -1,4 +1,4 @@
-import CategoryProducts from "../components/Products/CategoryProducts";
+import SectionCategoryProducts from "../components/Products/SectionCategoryProducts";
 import CustomerX from "../components/Sections/CustomerX";
 import SlidingBannerAds from "../components/Sections/SlidingBannerAds";
 
@@ -23,7 +23,7 @@ const sliders = [
   },
 ];
 
-const Home = () => {
+const HomePage = () => {
   return (
     <main className="common-main-container-styles">
       {/* center inner wrapper */}
@@ -34,19 +34,19 @@ const Home = () => {
         <SlidingBannerAds sliders={sliders} />
 
         {/* Electronics products */}
-        <CategoryProducts titlePrefix="The best on" category="electronics" />
+        <SectionCategoryProducts titlePrefix="The best on" category="electronics" />
 
         {/* Jewelery products */}
-        <CategoryProducts titlePrefix="Top" category="jewelery" />
+        <SectionCategoryProducts titlePrefix="Top" category="jewelery" />
 
         {/* Men's clothing products */}
-        <CategoryProducts
+        <SectionCategoryProducts
           titlePrefix="Best value on"
           category="men's clothing"
         />
 
         {/* Women's clothing products */}
-        <CategoryProducts
+        <SectionCategoryProducts
           titlePrefix="Enjoy discounts on"
           category="women's clothing"
         />
@@ -58,4 +58,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default HomePage;

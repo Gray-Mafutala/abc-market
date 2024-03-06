@@ -12,6 +12,7 @@ const useFetch = <T = unknown>(url: string): State<T> => {
   const [error, setError] = useState();
 
   useEffect(() => {
+    setIsLoading(true);
     fetch(url)
       .then((data) => data.json())
       .then((json) => {

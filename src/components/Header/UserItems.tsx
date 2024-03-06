@@ -1,10 +1,13 @@
 import { NavLink } from "react-router-dom";
 
+import ShoppingCart from "../ShoppingCart";
+
 import { HiOutlineHeart } from "react-icons/hi";
 import { FiUser } from "react-icons/fi";
-
 import { BiSolidPackage } from "react-icons/bi";
-import ShoppingCart from "../ShoppingCart";
+
+import { selectFavoritesCount } from "../../redux/slices/favoritesSlice";
+import { useAppSelector } from "../../redux/hooks";
 
 const userItems = [
   { title: "Account", link: "/account", icon: <FiUser /> },
@@ -33,6 +36,8 @@ const UserItems = ({
   setOpenShoppingCart,
   hideMobileMenu,
 }: UserItemsProps) => {
+  const favoritesCount = useAppSelector(selectFavoritesCount);
+
   return (
     <>
       {userItems.map(({ title, link, icon }) => (
@@ -44,7 +49,9 @@ const UserItems = ({
             isActive ? `${activeItemStyles}` : `${itemStyles}`
           }
         >
-          <span className={notifStyles}>5</span>
+          {title === "Favorites" && favoritesCount > 0 && (
+            <span className={notifStyles}>{favoritesCount}</span>
+          )}
           <span className={iconStyles}>{icon}</span>
           <span className={titleStyles}>{title}</span>
         </NavLink>

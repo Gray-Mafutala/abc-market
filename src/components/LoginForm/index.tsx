@@ -1,34 +1,28 @@
-import { useLocation, useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 
-import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+import { firebaseAuth, signInWithEmailAndPassword } from "../../firebase";
 
-import { userSignIn, selectAuth } from "../../redux/slices/authSlice";
-
+import { LoginFormValues } from "../../types";
 import { useForm } from "react-hook-form";
 import InputField from "./InputField";
-import { LoginFormValues } from "../../models";
 
 const LoginForm = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const { pending } = useAppSelector(selectAuth);
-  const dispatch = useAppDispatch();
+  // react-hook-form
+  const { handleSubmit, register, formState } = useForm<LoginFormValues>();
+  const { errors, isSubmitting } = formState;
 
+  // login error state
   const [loginError, setLoginError] = useState({
     emailError: "",
     passwordError: "",
     anotherError: "",
   });
 
-  const { handleSubmit, register, formState } = useForm<LoginFormValues>({
-    mode: "onTouched",
-  });
-  const { errors, isSubmitting } = formState;
-
-  console.log("re-rendu");
-
+  // to handle login errors
   const handleLoginErrorsState = (errorCode: string, errorMessage: string) => {
     switch (errorCode) {
       case "auth/invalid-email":
@@ -65,31 +59,35 @@ const LoginForm = () => {
     }
   };
 
-  const onSubmit = ({ email, password }: LoginFormValues) => {
-    /* the addition of the "return new Promise..." helps to display
-        a spin-loader on the sign-in button during submission */
-    return new Promise((resolve) => {
-      // no error at start of login-form submission
-      setLoginError({
-        emailError: "",
-        passwordError: "",
-        anotherError: "",
-      });
+  //  // to know which error to display now (react-hook-form errors or login errors or nothing)
+  //  const witchErrorToDisplayNow = () => {
+  //    if (errors.email?.message || errors.password?.message)
+  //      setLoginError({
+  //        emailError: errors.email?.message ?? "",
+  //        passwordError: errors.password?.message ?? "",
+  //        anotherError: "",
+  //      });
+  //  };
 
-      dispatch(userSignIn({ email, password }))
-        .unwrap()
-        .then((user) => {
-          // resolves the promise with a value
-          resolve(user.id);
+  // to sign-in user
 
-          /* go to the page we wanted to access before 
-            logging in, else go to HomePage */
-          location.state?.path ? navigate(location.state.path) : navigate("/");
-        })
-        .catch((error) => {
-          handleLoginErrorsState(error.code, error.message);
-        });
+  const onSubmit = async ({ email, password }: LoginFormValues) => {
+    // no error at start of login-form submission
+    setLoginError({
+      emailError: "",
+      passwordError: "",
+      anotherError: "",
     });
+
+    try {
+      await signInWithEmailAndPassword(firebaseAuth, email, password);
+      // go to the page we wanted to access before logging in, else go to HomePage.
+      location.state?.path ? navigate(location.state.path) : navigate("/");
+
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (error: any) {
+      handleLoginErrorsState(error.code, error.message);
+    }
   };
 
   return (
@@ -97,12 +95,6 @@ const LoginForm = () => {
       className="flex flex-col gap-y-6 bg-white px-6 pt-4 pb-6 
       max-w-sm mx-auto rounded-md shadow-sm"
     >
-      {/* debug */}
-      <p className="flex flex-col border">
-        {/*<span>isDirty: {JSON.stringify(isDirty)}</span>*/}
-        <span>isSubmitting: {JSON.stringify(isSubmitting)}</span>
-      </p>
-
       {/* title */}
       <h2
         className="text-2xl mobileL:text-3xl
@@ -140,19 +132,10 @@ const LoginForm = () => {
             autoFocus={true}
           />
 
-          {/* email error (from react-hook-form) */}
-          {errors.email ? (
-            <span className="text-red-500 text-sm font-light">
-              {errors.email.message}
-            </span>
-          ) : (
-            // from firebase/auth
-            loginError.emailError && (
-              <span className="text-red-500 text-sm font-light">
-                {loginError.emailError}
-              </span>
-            )
-          )}
+          <span className="text-red-500 text-sm font-light">
+            {/* display email error from react-hook-form or from firebase/auth */}
+            {errors.email ? errors.email.message : loginError.emailError}
+          </span>
         </div>
 
         {/* password */}
@@ -178,25 +161,18 @@ const LoginForm = () => {
             inputType="password"
           />
 
-          {/* password error (from react-hook-form) */}
-          {!errors.email && errors.password ? (
-            <span className="text-red-500 text-sm font-light">
-              {errors.password.message}
-            </span>
-          ) : (
-            // from firebase/auth
-            loginError.passwordError && (
-              <span className="text-red-500 text-sm font-light">
-                {loginError.passwordError}
-              </span>
-            )
-          )}
+          {/* password error from react-hook-form or from firebase/auth */}
+          <span className="text-red-500 text-sm font-light">
+            {!errors.email && errors.password
+              ? errors.password.message
+              : loginError.passwordError}
+          </span>
         </div>
 
         {/* btn to submit */}
         <button
           type="submit"
-          disabled={isSubmitting && pending}
+          disabled={isSubmitting}
           className="mt-2 py-2 px-5 rounded-3xl text-base mobileM:text-lg
           font-medium bg-primary-blue/80 text-white border-2 
           border-transparent hover:bg-white hover:text-primary-blue/80
@@ -206,7 +182,7 @@ const LoginForm = () => {
           duration-300 flex items-center justify-center gap-x-3 whitespace-nowrap test"
         >
           Sign in
-          {isSubmitting && pending && (
+          {isSubmitting && (
             <span className="-order-1">
               <svg
                 viewBox="0 0 24 24"

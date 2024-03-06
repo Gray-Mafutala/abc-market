@@ -7,19 +7,14 @@ const useLocalStorage = (key: string, defaultValue: unknown) => {
 
   const [value, setValue] = useState(stateValue);
 
-  /* each time the storedItems is updated, 
-  it will be automatically saved in the localStorage */
+  // each time the storedItems is updated, it will be automatically saved in the localStorage
   useEffect(() => {
     localStorage.setItem(key, JSON.stringify(value));
   }, [key, value]);
 
-  const resetToDefaultValue = () => setValue(defaultValue);
+  const clearItems = () => setValue(defaultValue);
 
-  return {
-    localStorageValue: value,
-    setLocalStorageValue: setValue,
-    resetItemToDefaultValue: resetToDefaultValue,
-  };
+  return [value, setValue, clearItems];
 };
 
 export default useLocalStorage;

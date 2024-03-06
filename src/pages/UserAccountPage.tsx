@@ -1,14 +1,21 @@
-import { selectAuth, userSignOut } from "../redux/slices/authSlice";
+import { Link } from "react-router-dom";
+import { firebaseAuth, signOut } from "../firebase";
+import { removeUser, selectAuth, setPending } from "../redux/slices/authSlice";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { FiLogOut } from "react-icons/fi";
-import { Link } from "react-router-dom";
+import { FiUser } from "react-icons/fi";
 
-const UserAccount = () => {
-  const { currentUser } = useAppSelector(selectAuth);
+const UserAccountPage = () => {
+  const { currentUser, pending } = useAppSelector(selectAuth);
   const dispatch = useAppDispatch();
 
-  const logout = () => {
-    dispatch(userSignOut());
+  const logout = async () => {
+    try {
+      dispatch(setPending(true));
+      await signOut(firebaseAuth);
+    } catch (error) {
+      dispatch(removeUser());
+    }
   };
 
   return (
@@ -30,8 +37,10 @@ const UserAccount = () => {
             {/* btn to log out */}
             <button
               onClick={logout}
+              disabled={pending}
               title="Sign out"
-              className="text-slate-700 hover:text-primary-blue duration-300"
+              className="text-slate-700 hover:text-primary-blue duration-300
+              disabled:text-slate-300"
             >
               <FiLogOut size={24} />
             </button>
@@ -39,19 +48,18 @@ const UserAccount = () => {
 
           {/* body */}
           {/* avatar, full name and email */}
-          <div
-            className="flex flex-col gap-y-2 items-center text-center 
-            mobileM:flex-row justify-between mobileM:text-left"
-          >
-            <img
-              src={
-                currentUser?.photoUrl
-                  ? currentUser.photoUrl
-                  : "https://t4.ftcdn.net/jpg/03/32/59/65/240_F_332596535_lAdLhf6KzbW6PWXBWeIFTovTii1drkbT.jpg"
-              }
-              alt="avatar of current user"
-              className="rounded-full border w-28 aspect-square h-auto object-contain"
-            />
+          <div className="flex flex-col gap-y-2 items-center text-center justify-between">
+            {currentUser?.photoUrl ? (
+              <img
+                src={currentUser.photoUrl}
+                alt="photo profil of current user"
+                className="rounded-full border w-28 aspect-square h-auto object-contain"
+              />
+            ) : (
+              <span className="text-slate-400 border-2 border-slate-200 rounded-full p-5">
+                <FiUser size={100} />
+              </span>
+            )}
 
             <p className="flex flex-col">
               <span className="text-slate-700 text-lg mobileM:text-xl font-bold">
@@ -94,4 +102,4 @@ const UserAccount = () => {
   );
 };
 
-export default UserAccount;
+export default UserAccountPage;

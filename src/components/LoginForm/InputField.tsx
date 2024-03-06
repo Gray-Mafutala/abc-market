@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { RegisterOptions, UseFormRegister } from "react-hook-form";
-import { LoginFormValues } from "../../models";
+import { LoginFormValues } from "../../types";
 import { HiEye, HiEyeOff } from "react-icons/hi";
 
 type InputFieldProps = {
@@ -64,7 +64,7 @@ const InputField = ({
             className="absolute right-2 p-2 text-slate-500
             hover:text-primary-blue/80 duration-300 outline-primary-blue"
           >
-            {isPassword ?  <HiEyeOff size={20} /> : <HiEye size={20} />}
+            {isPassword ? <HiEyeOff size={20} /> : <HiEye size={20} />}
           </button>
         </div>
       ) : (

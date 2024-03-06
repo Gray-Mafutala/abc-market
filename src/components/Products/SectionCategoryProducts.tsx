@@ -6,14 +6,14 @@ import FetchDataErrorDisplay from "../UI/FetchDataErrorDisplay";
 import SkeletonProductCard from "./SkeletonProductCard";
 
 import { IoIosArrowForward } from "react-icons/io";
-import { ProductType } from "../../models";
+import { ProductType } from "../../types";
 
 type CategoryProductsProps = {
   titlePrefix: string;
   category: string;
 };
 
-const CategoryProducts = ({ titlePrefix, category }: CategoryProductsProps) => {
+const SectionCategoryProducts = ({ titlePrefix, category }: CategoryProductsProps) => {
   const baseURL = "https://fakestoreapi.com/products/category";
   const { data, isLoading, error } = useFetch<ProductType[]>(
     `${baseURL}/${category}?limit=4`
@@ -92,4 +92,4 @@ const CategoryProducts = ({ titlePrefix, category }: CategoryProductsProps) => {
   );
 };
 
-export default CategoryProducts;
+export default SectionCategoryProducts;

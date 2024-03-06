@@ -22,6 +22,16 @@ input[type=search]::-ms-reveal {
     height: 0
 }
 
+input[type="password"]::-ms-reveal,
+input[type="password"]::-ms-clear {
+    display: none;
+}
+
+input::-ms-reveal,
+input::-ms-clear {
+    display: none;
+}
+
 a {
     user-select: none;
 }

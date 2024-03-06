@@ -1,8 +1,16 @@
 import { useMemo } from "react";
+
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+import {
+  selectIsLiked,
+  toggleFavorite,
+} from "../../redux/slices/favoritesSlice";
+
 import AddToCartManager from "./AddToCartManager";
+import StarRating from "../UI/StarRating";
+
 import { HiHeart } from "react-icons/hi";
 import { TbDiscountCheckFilled } from "react-icons/tb";
-import StarRating from "../UI/StarRating";
 
 type ProductCardProps = {
   id: number;
@@ -13,14 +21,12 @@ type ProductCardProps = {
   rating: { rate: number; count: number };
 };
 
-const ProductCard = ({
-//  id,
-  title,
-//  description,
-  price,
-  image,
-  rating,
-}: ProductCardProps) => {
+const ProductCard = (details: ProductCardProps) => {
+  const { id, title, /*description,*/ price, image, rating } = details;
+
+  const dispatch = useAppDispatch();
+  const isLiked = useAppSelector((state) => selectIsLiked(state, id));
+
   // generate a fake discount % between 10-50 (or not, randomly)
   const discountPercentage = useMemo(() => {
     return Math.random() < 0.4 ? 0 : Math.floor(Math.random() * (50 - 10) + 10);
@@ -42,15 +48,21 @@ const ProductCard = ({
           text-sm font-bold bg-red-50 text-red-500 px-1 py-[2px]
           rounded-md"
         >
-          <TbDiscountCheckFilled size={16} /> -{discountPercentage}%
+          <TbDiscountCheckFilled size={16} /> - {discountPercentage}%
         </span>
       )}
 
       {/* like btn */}
       <button
-        className="absolute top-2 right-2 bg-blue-light rounded-full
-        p-1 text-slate-300 hover:text-rose-400 active:animate-ping
-        duration-500 ease-out"
+        onClick={() => dispatch(toggleFavorite(details))}
+        className={
+          isLiked
+            ? `absolute top-2 right-2 bg-blue-light rounded-full p-1
+            duration-500 ease-out text-rose-500 active:animate-ping`
+            : `absolute top-2 right-2 bg-blue-light rounded-full p-1
+            duration-500 ease-out text-slate-300 hover:text-rose-500
+            active:animate-ping `
+        }
       >
         <HiHeart size={20} />
       </button>
@@ -76,20 +88,21 @@ const ProductCard = ({
         <p className="flex justify-center items-baseline gap-x-5">
           {discountPercentage > 0 ? (
             <>
-              {/* prices before and after reduction */}
+              {/* prices after reduction */}
               <span
                 className="bg-primary-blue/80 text-white px-[6px]
                 rounded-md font-semibold text-[1.3rem] leading-[1.4]
                 pt-[2px]"
               >
-                ${getPriceBeforeDiscount(price, discountPercentage)}
+                ${price}
               </span>
+              {/* prices before reduction */}
               <span
                 className="text-[1rem] font-medium text-slate-400 
                 relative after:absolute after:h-[1px] after:w-full 
                 after:bg-red-400 after:left-0 after:top-[48%]"
               >
-                ${price}
+                ${getPriceBeforeDiscount(price, discountPercentage)}
               </span>
             </>
           ) : (
@@ -111,7 +124,16 @@ const ProductCard = ({
 
       {/* add to cart manager */}
       <div className="mt-5">
-        <AddToCartManager />
+        <AddToCartManager
+          id={id}
+          title={title}
+          image={image}
+          price={price}
+          priceBeforeDiscount={getPriceBeforeDiscount(
+            price,
+            discountPercentage
+          )}
+        />
       </div>
     </li>
   );

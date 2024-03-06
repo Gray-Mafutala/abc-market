@@ -1,3 +1,8 @@
+import { useAppSelector } from "../../redux/hooks";
+import {
+  selectPriceBeforeDiscountOfSpecificItem,
+  selectQtyOfSpecificItem,
+} from "../../redux/slices/cartSlice";
 import AddToCartManager from "./AddToCartManager";
 import { TbTruckDelivery, TbDiscount2 } from "react-icons/tb";
 
@@ -5,19 +10,24 @@ type ShoppingCartItemProps = {
   id: number;
   title: string;
   price: number;
-  hasADiscount: boolean;
-  priceBeforeDiscount: number;
   image: string;
 };
 
 const ShoppingCartItem = ({
-  //  id,
+  id,
   title,
   price,
-  hasADiscount,
-  priceBeforeDiscount,
   image,
 }: ShoppingCartItemProps) => {
+  const qtyOfSpecificItem = useAppSelector((state) =>
+    selectQtyOfSpecificItem(state, id)
+  );
+  const priceBeforeDiscount = useAppSelector((state) =>
+    selectPriceBeforeDiscountOfSpecificItem(state, id)
+  );
+  const hasADiscount =
+    priceBeforeDiscount !== null && priceBeforeDiscount !== price;
+
   return (
     <li className="flex flex-col gap-y-2 mobileM:flex-row justify-between gap-x-4">
       {/* left content - checkbox, image, title... */}
@@ -70,13 +80,13 @@ const ShoppingCartItem = ({
           mobileM:justify-start"
         >
           {hasADiscount && (
-            <span className="text-sm line-through">${priceBeforeDiscount}</span>
+            <span className="text-sm line-through">${(priceBeforeDiscount * qtyOfSpecificItem).toFixed(2)}</span>
           )}
 
-          <span className="text-lg font-bold text-slate-600">${price}</span>
+          <span className="text-lg font-bold text-slate-600">${(price * qtyOfSpecificItem).toFixed(2)}</span>
         </p>
 
-        <AddToCartManager />
+        <AddToCartManager productId={id} />
       </div>
     </li>
   );

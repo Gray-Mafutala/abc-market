@@ -4,11 +4,7 @@ import {
   signInWithEmailAndPassword,
   signOut,
   onAuthStateChanged,
-  Unsubscribe,
-  User,
-  UserCredential,
 } from "firebase/auth";
-import { FirebaseError } from "@firebase/util";
 import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
@@ -21,15 +17,13 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-const firestore = getFirestore(app);
+const firebaseAuth = getAuth(app);
+const firebaseFirestore = getFirestore(app);
 
 export {
-  auth,
-  firestore,
+  firebaseAuth,
+  firebaseFirestore,
   onAuthStateChanged,
   signInWithEmailAndPassword,
   signOut,
-  FirebaseError,
 };
-export type { Unsubscribe, UserCredential, User };

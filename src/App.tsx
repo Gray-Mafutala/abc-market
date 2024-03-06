@@ -1,37 +1,30 @@
 import { Suspense, useEffect } from "react";
-
-import { setPending, setUser, removeUser } from "./redux/slices/authSlice";
-import { useAppDispatch } from "./redux/hooks";
-import { auth, onAuthStateChanged } from "./firebase";
-
 import Routing from "./routes";
+
+import { useLocation } from "react-router-dom";
+
 import Layout from "./pages/Layout";
 import PageLoader from "./components/UI/PageLoader";
+
+import { removeUser, setUser } from "./redux/slices/authSlice";
+import { onAuthStateChanged } from "firebase/auth";
+import { firebaseAuth } from "./firebase";
+import { useAppDispatch } from "./redux/hooks";
 
 const App = () => {
   // monitoring user authentication
   const dispatch = useAppDispatch();
-
   useEffect(() => {
-    console.log("from useEffect App");
-
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      console.log("from onAuthStateChanged - user:", user);
-
-      dispatch(setPending(true));
-
+    const unsubscribe = onAuthStateChanged(firebaseAuth, (user) => {
       if (user) {
-        /* set user only if currentUser = null, i.e. only at App launch, 
-            so as not to update the store/auth/currentUser at login. */
-        //currentUser === null &&
-        dispatch(
-          setUser({
-            id: user.uid,
-            email: user.email,
-            displayName: user.displayName,
-            photoUrl: user.photoURL,
-          })
-        );
+        const userSerialized = {
+          id: user.uid,
+          email: user.email,
+          displayName: user.displayName,
+          photoUrl: user.photoURL,
+        };
+
+        dispatch(setUser(userSerialized));
       } else {
         dispatch(removeUser());
       }
@@ -40,6 +33,10 @@ const App = () => {
     return () => unsubscribe();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  // to scroll to top when route changes
+  const { pathname } = useLocation();
+  useEffect(() => window.scrollTo(0, 0), [pathname]);
 
   return (
     <Layout>
