@@ -3,8 +3,8 @@ import {
   increaseItemQty,
   decreaseItemQty,
   selectQtyOfSpecificItem,
-  removeItemFromCart,
-} from "../../redux/slices/cartSlice";
+  removeItemFromShoppingCart,
+} from "../../redux/slices/shoppingCartSlice";
 
 import { TbMinus, TbPlus } from "react-icons/tb";
 
@@ -21,7 +21,7 @@ const AddToCartManager = ({ productId }: AddToCartManagerProps) => {
 
   const handleDecreaseAndRemoveItemFromCart = (id: number) => {
     qtyOfSpecificItem <= 1
-      ? dispatch(removeItemFromCart(id))
+      ? dispatch(removeItemFromShoppingCart(id))
       : dispatch(decreaseItemQty(id));
   };
 

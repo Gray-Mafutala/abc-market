@@ -1,7 +1,12 @@
+import { NavLink } from "react-router-dom";
+
+import { useAppDispatch } from "../../redux/hooks";
+import { setSearchValue } from "../../redux/slices/searchBarSlice";
+import { closeMobileMenu } from "../../redux/slices/mobileMenu";
+
 import { MdOutlinePhonelink } from "react-icons/md";
 import { RiShirtFill } from "react-icons/ri";
 import { GiBigDiamondRing, GiLargeDress } from "react-icons/gi";
-import { NavLink } from "react-router-dom";
 
 const categories = [
   {
@@ -22,21 +27,22 @@ type CategoryItems = {
   withIcon?: boolean;
   itemStyles: string;
   activeItemStyles: string;
-  hideMobileMenu?: () => void;
 };
 
 const CategoryItems = ({
   withIcon = false,
   itemStyles,
   activeItemStyles,
-  hideMobileMenu,
 }: CategoryItems) => {
+  const dispatch = useAppDispatch();
+
   return (
     <>
       {categories.map(({ title, icon, link }) => (
-        <li key={title} onClick={hideMobileMenu}>
+        <li key={title} onClick={() => dispatch(closeMobileMenu())}>
           <NavLink
             to={`/products/category/${link}`}
+            onClick={() => dispatch(setSearchValue(""))}
             className={({ isActive }) =>
               isActive
                 ? `${activeItemStyles} flex items-center gap-x-4`

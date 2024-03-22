@@ -3,7 +3,7 @@ import type { PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "..";
 import { ProductType } from "../../types";
 
-export const FAVORITES_LOCAL_STORAGE_KEY = "wishlist";
+export const FAVORITES_LOCAL_STORAGE_KEY = "WISHLIST";
 
 interface FavoritesState {
   favoritesList: ProductType[];

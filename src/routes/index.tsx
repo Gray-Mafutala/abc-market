@@ -3,13 +3,16 @@ import { useRoutes } from "react-router-dom";
 import RequireAuth from "../features/RequireAuth";
 
 const HomePage = React.lazy(() => import("../pages/HomePage"));
+
 const CategoryProductsPage = React.lazy(
   () => import("../pages/CategoryProductsPage")
 );
+
 const OrdersPage = React.lazy(() => import("../pages/OrdersPage"));
 const FavoritesPage = React.lazy(() => import("../pages/FavoritesPage"));
 const UserAccountPage = React.lazy(() => import("../pages/UserAccountPage"));
 const LoginPage = React.lazy(() => import("../pages/LoginPage"));
+const PageNotFound = React.lazy(() => import("../pages/PageNotFound"));
 
 const Routing = () => {
   const routes = useRoutes([
@@ -24,7 +27,7 @@ const Routing = () => {
       path: "/orders",
       element: (
         <RequireAuth>
-          <OrdersPage />,
+          <OrdersPage />
         </RequireAuth>
       ),
     },
@@ -33,7 +36,7 @@ const Routing = () => {
       path: "/favorites",
       element: (
         <RequireAuth>
-          <FavoritesPage />,
+          <FavoritesPage />
         </RequireAuth>
       ),
     },
@@ -48,6 +51,8 @@ const Routing = () => {
     },
 
     { path: "/login", element: <LoginPage /> },
+
+    { path: "/*", element: <PageNotFound /> },
   ]);
 
   return routes;

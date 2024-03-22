@@ -1,27 +1,26 @@
-import React from "react";
-
 import ModalWrapper from "../Wrappers/ModalWrapper";
 import SearchBar from "./SearchBar";
 
 import { LuSearch } from "react-icons/lu";
+import {
+  closeMobileSearchBar,
+  openMobileSearchBar,
+  selectMobileSearchBarIsOpen,
+} from "../../redux/slices/searchBarSlice";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 
-type MobileSearchBarProps = {
-  open: boolean;
-  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
-};
-
-const MobileSearchBar = ({ open, setOpen }: MobileSearchBarProps) => {
-  const showMobileSearchBar = () => setOpen(true);
-  const closeMobileSearchBar = () => setOpen(false);
+const MobileSearchBar = () => {
+  const dispatch = useAppDispatch();
+  const mobileSearchBarIsOpen = useAppSelector(selectMobileSearchBarIsOpen);
 
   return (
     <>
-      {/* searchbox wrapper */}
+      {/* SearchBar wrapper */}
       <ModalWrapper
-        isOpen={open}
-        onClose={closeMobileSearchBar}
+        isOpen={mobileSearchBarIsOpen}
+        onClose={() => dispatch(closeMobileSearchBar())}
         modalWrapperAddStyles={
-          open
+          mobileSearchBarIsOpen
             ? "inset-0 duration-300"
             : "inset-0 -translate-y-[100%] duration-300"
         }
@@ -31,9 +30,9 @@ const MobileSearchBar = ({ open, setOpen }: MobileSearchBarProps) => {
         <SearchBar />
       </ModalWrapper>
 
-      {/* btn to show searchbox wrapper */}
+      {/* btn to show SearchBar wrapper */}
       <button
-        onClick={showMobileSearchBar}
+        onClick={() => dispatch(openMobileSearchBar())}
         className="block mobileL:hidden px-[6px] py-[6px] rounded-[4px]
         text-primary-blue/80 active:bg-primary-blue/80
         active:text-white duration-300"

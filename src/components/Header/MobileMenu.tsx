@@ -1,4 +1,11 @@
-import React, { useState } from "react";
+import { useState } from "react";
+
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+import {
+  closeMobileMenu,
+  openMobileMenu,
+  selectMobileMenuIsOpen,
+} from "../../redux/slices/mobileMenu";
 
 import ModalWrapper from "../Wrappers/ModalWrapper";
 import CategoryItems from "./CategoryItems";
@@ -9,37 +16,25 @@ import { FiUser } from "react-icons/fi";
 import { TbTruckDelivery, TbCategory2, TbDiscount2 } from "react-icons/tb";
 import { MdLocationOn } from "react-icons/md";
 
-type MobileMenuProps = {
-  open: boolean;
-  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  shoppingCartIsOpen: boolean;
-  setOpenShoppingCart: React.Dispatch<React.SetStateAction<boolean>>;
-};
-
 const verticalNavItems = [
   { icon: <FiUser />, position: 1 },
   { icon: <TbCategory2 />, position: 2 },
   { icon: <TbTruckDelivery />, position: 3 },
 ];
 
-const MobileMenu = ({
-  open,
-  setOpen,
-  shoppingCartIsOpen,
-  setOpenShoppingCart,
-}: MobileMenuProps) => {
-  const [current, setCurrent] = useState(1);
-  const showMobileMenu = () => setOpen(true);
-  const closeMobileMenu = () => setOpen(false);
+const MobileMenu = () => {
+  const [currentTab, setCurrentTab] = useState(1);
+  const dispatch = useAppDispatch();
+  const mobileMenuIsOpen = useAppSelector(selectMobileMenuIsOpen);
 
   return (
     <>
-      {/* searchbox wrapper */}
+      {/* SearchBar wrapper */}
       <ModalWrapper
-        isOpen={open}
-        onClose={closeMobileMenu}
+        isOpen={mobileMenuIsOpen}
+        onClose={() => dispatch(closeMobileMenu())}
         modalWrapperAddStyles={
-          open
+          mobileMenuIsOpen
             ? "inset-0 duration-300"
             : "inset-0 -translate-x-[100%] duration-300"
         }
@@ -56,9 +51,9 @@ const MobileMenu = ({
           {verticalNavItems.map(({ icon, position }) => (
             <button
               key={position}
-              onClick={() => setCurrent(position)}
+              onClick={() => setCurrentTab(position)}
               className={
-                position === current
+                position === currentTab
                   ? `after:block after:w-6 after:h-[1px] after:mx-auto
                         after:mt-2 after:bg-gray-200 px-2 py-1 mobileL:px-3 
                         mobileL:py-2 border-l-4 border-l-primary-blue/80
@@ -78,7 +73,7 @@ const MobileMenu = ({
         {/* 1 - account, orders, ... */}
         <div
           className={
-            current === 1
+            currentTab === 1
               ? `flex-grow px-4 pt-16 pb-8 flex flex-col items-start 
                     gap-y-5 duration-200 ease-in-out`
               : `flex-grow px-4 pt-16 pb-8 flex flex-col items-start 
@@ -95,16 +90,13 @@ const MobileMenu = ({
               min-w-[28px] max-w-[48px] text-center notif"
             iconStyles="text-[24px] mobileL:text-[28px] duration-300"
             titleStyles="text-base mobileL:text-lg duration-300"
-            hideMobileMenu={closeMobileMenu}
-            setOpenShoppingCart={setOpenShoppingCart}
-            shoppingCartIsOpen={shoppingCartIsOpen}
           />
         </div>
 
         {/* 2 - categories */}
         <ul
           className={
-            current === 2
+            currentTab === 2
               ? `flex-grow px-4 pt-16 pb-8 flex flex-col items-start 
                     gap-y-5 text-base mobileL:text-lg
                     duration-200 ease-in-out`
@@ -118,14 +110,13 @@ const MobileMenu = ({
             itemStyles="leading-[18px] whitespace-nowrap duration-300
               hover:text-primary-blue/80"
             activeItemStyles="text-primary-blue/80"
-            hideMobileMenu={closeMobileMenu}
           />
         </ul>
 
         {/* 3 - welcome, location,... */}
         <div
           className={
-            current === 3
+            currentTab === 3
               ? `flex-grow px-4 pt-16 pb-8 flex flex-col items-start
                     gap-y-5 text-base mobileL:text-lg
                     duration-200 ease-in-out`
@@ -173,7 +164,7 @@ const MobileMenu = ({
 
       {/* btn to show mobile menu */}
       <button
-        onClick={showMobileMenu}
+        onClick={() => dispatch(openMobileMenu())}
         className="px-[6px] py-[6px] rounded-[4px] flex items-center 
         justify-center odd:bg-blue-light text-primary-blue/80 duration-300 
         hover:bg-primary-blue/80 hover:text-white active:bg-transparent

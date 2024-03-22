@@ -1,15 +1,15 @@
 import { useEffect, useState } from "react";
 
 interface State<T> {
-  data?: T;
+  data: T | null
   isLoading: boolean;
-  error?: Error;
+  error: Error | null;
 }
 
 const useFetch = <T = unknown>(url: string): State<T> => {
-  const [data, setData] = useState<T>([] as T);
+  const [data, setData] = useState<T | null>(null);
   const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState();
+  const [error, setError] = useState<Error | null>(null);
 
   useEffect(() => {
     setIsLoading(true);

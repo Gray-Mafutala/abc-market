@@ -1,4 +1,4 @@
-import { VscBracketError } from "react-icons/vsc";
+import { BsDatabaseX } from "react-icons/bs";
 
 const FetchDataErrorDisplay = ({ msg }: { msg: string }) => {
   return (
@@ -9,8 +9,8 @@ const FetchDataErrorDisplay = ({ msg }: { msg: string }) => {
       <div
         className="flex flex-col mobileM:flex-row items-center justify-center gap-x-4"
       >
-        <VscBracketError
-          className="text-red-200 text-[24px] min-w-[24px]
+        <BsDatabaseX
+          className="text-slate-200 text-[24px] min-w-[24px]
           mobileL:text-[28px] mobileXL:text-[32px]"
         />
         <p className="font-medium text-gray-400 text-lg

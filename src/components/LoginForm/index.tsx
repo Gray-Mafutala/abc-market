@@ -50,6 +50,15 @@ const LoginForm = () => {
         });
         break;
 
+      case "auth/network-request-failed":
+        setLoginError({
+          emailError: "",
+          passwordError: "",
+          anotherError:
+            "An error has occurred, please check your internet connection and try again.",
+        });
+        break;
+
       default:
         setLoginError({
           emailError: "",
@@ -59,18 +68,7 @@ const LoginForm = () => {
     }
   };
 
-  //  // to know which error to display now (react-hook-form errors or login errors or nothing)
-  //  const witchErrorToDisplayNow = () => {
-  //    if (errors.email?.message || errors.password?.message)
-  //      setLoginError({
-  //        emailError: errors.email?.message ?? "",
-  //        passwordError: errors.password?.message ?? "",
-  //        anotherError: "",
-  //      });
-  //  };
-
   // to sign-in user
-
   const onSubmit = async ({ email, password }: LoginFormValues) => {
     // no error at start of login-form submission
     setLoginError({

@@ -6,8 +6,10 @@ import { HiOutlineHeart } from "react-icons/hi";
 import { FiUser } from "react-icons/fi";
 import { BiSolidPackage } from "react-icons/bi";
 
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+import { closeMobileMenu } from "../../redux/slices/mobileMenu";
 import { selectFavoritesCount } from "../../redux/slices/favoritesSlice";
-import { useAppSelector } from "../../redux/hooks";
+import { selectAuth } from "../../redux/slices/authSlice";
 
 const userItems = [
   { title: "Account", link: "/account", icon: <FiUser /> },
@@ -21,9 +23,6 @@ type UserItemsProps = {
   notifStyles: string;
   iconStyles: string;
   titleStyles: string;
-  shoppingCartIsOpen: boolean;
-  setOpenShoppingCart: React.Dispatch<React.SetStateAction<boolean>>;
-  hideMobileMenu?: () => void;
 };
 
 const UserItems = ({
@@ -32,24 +31,24 @@ const UserItems = ({
   notifStyles,
   iconStyles,
   titleStyles,
-  shoppingCartIsOpen,
-  setOpenShoppingCart,
-  hideMobileMenu,
 }: UserItemsProps) => {
+  const { currentUser } = useAppSelector(selectAuth);
   const favoritesCount = useAppSelector(selectFavoritesCount);
+
+  const dispatch = useAppDispatch();
 
   return (
     <>
       {userItems.map(({ title, link, icon }) => (
         <NavLink
           key={title}
-          onClick={hideMobileMenu}
+          onClick={() => dispatch(closeMobileMenu())}
           to={link}
           className={({ isActive }) =>
             isActive ? `${activeItemStyles}` : `${itemStyles}`
           }
         >
-          {title === "Favorites" && favoritesCount > 0 && (
+          {title === "Favorites" && currentUser && favoritesCount > 0 && (
             <span className={notifStyles}>{favoritesCount}</span>
           )}
           <span className={iconStyles}>{icon}</span>
@@ -58,9 +57,6 @@ const UserItems = ({
       ))}
 
       <ShoppingCart
-        open={shoppingCartIsOpen}
-        setOpen={setOpenShoppingCart}
-        hideMobileMenu={hideMobileMenu}
         cartBtnStyles={{ itemStyles, notifStyles, iconStyles, titleStyles }}
       />
     </>

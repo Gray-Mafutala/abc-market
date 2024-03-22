@@ -4,12 +4,12 @@ import { MdAddShoppingCart } from "react-icons/md";
 import { TbMinus, TbPlus } from "react-icons/tb";
 
 import {
-  addItemToCart,
+  addItemToShoppingCart,
   decreaseItemQty,
   increaseItemQty,
-  removeItemFromCart,
+  removeItemFromShoppingCart,
   selectQtyOfSpecificItem,
-} from "../../redux/slices/cartSlice";
+} from "../../redux/slices/shoppingCartSlice";
 
 type AddToCartManagerProps = {
   id: number;
@@ -33,7 +33,7 @@ const AddToCartManager = ({
 
   const handleDecreaseAndRemoveItemFromCart = (id: number) => {
     qtyOfSpecificItem <= 1
-      ? dispatch(removeItemFromCart(id))
+      ? dispatch(removeItemFromShoppingCart(id))
       : dispatch(decreaseItemQty(id));
   };
 
@@ -43,7 +43,7 @@ const AddToCartManager = ({
       {qtyOfSpecificItem === 0 && (
         <button
           onClick={() =>
-            dispatch(addItemToCart({ id, title, image, price, priceBeforeDiscount, quantity: 1 }))
+            dispatch(addItemToShoppingCart({ id, title, image, price, priceBeforeDiscount, quantity: 1 }))
           }
           className="border border-slate-300 text-slate-500 text-lg 
           font-medium w-full h-[46px] px-4 rounded-3xl flex items-center

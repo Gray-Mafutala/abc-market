@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
 
 import useFetch from "../../hooks/useFetch";
-import ProductCard from "./ProductCard";
+import ProductCard from "../Products/ProductCard";
 import FetchDataErrorDisplay from "../UI/FetchDataErrorDisplay";
-import SkeletonProductCard from "./SkeletonProductCard";
+import SkeletonProductCard from "../Products/SkeletonProductCard";
 
 import { IoIosArrowForward } from "react-icons/io";
 import { ProductType } from "../../types";
@@ -13,7 +13,10 @@ type CategoryProductsProps = {
   category: string;
 };
 
-const SectionCategoryProducts = ({ titlePrefix, category }: CategoryProductsProps) => {
+const SectionCategoryProducts = ({
+  titlePrefix,
+  category,
+}: CategoryProductsProps) => {
   const baseURL = "https://fakestoreapi.com/products/category";
   const { data, isLoading, error } = useFetch<ProductType[]>(
     `${baseURL}/${category}?limit=4`
@@ -27,11 +30,11 @@ const SectionCategoryProducts = ({ titlePrefix, category }: CategoryProductsProp
         pb-3 mobileL:pb-4 border-b-[#ededed] gap-x-8"
       >
         <h2
-          className="text-lg mobileL:text-xl mobileXL:text-2xl 
+          className="text-lg mobileL:text-xl mobileXL:text-2xl
           text-slate-500 font-bold relative after:absolute 
-          after:w-full after:h-1 after:left-0 after:-bottom-3
-          mobileL:after:-bottom-4 after:bg-primary-blue/80
-          after:rounded-md inline-grid mobileM:block"
+            after:w-full after:h-1 after:left-0 after:-bottom-3
+            mobileL:after:-bottom-4 after:bg-primary-blue/80
+            after:rounded-md inline-grid mobileM:block"
         >
           {titlePrefix}{" "}
           <strong className="text-primary-blue/80">
@@ -55,7 +58,7 @@ const SectionCategoryProducts = ({ titlePrefix, category }: CategoryProductsProp
       {error && <FetchDataErrorDisplay msg={error.message} />}
 
       {/* B - if isLoading===true, then show Skeleton loading... */}
-      {isLoading && (
+      {!error && isLoading && (
         <ul
           className="grid grid-cols-1 gap-y-8 gap-x-6 mobileXL:grid-cols-2
           tabletM:grid-cols-3 laptop:grid-cols-4"
@@ -69,12 +72,12 @@ const SectionCategoryProducts = ({ titlePrefix, category }: CategoryProductsProp
 
       {/* C - if isLoading===false, then show first 4 products
             (ProductCard) of this category */}
-      {!isLoading && (
+      {!error && !isLoading && (
         <ul
           className="grid grid-cols-1 gap-y-8 gap-x-6 mobileXL:grid-cols-2
           tabletM:grid-cols-3 laptop:grid-cols-4"
         >
-          {data !== undefined &&
+          {data &&
             data.map((product) => (
               <ProductCard
                 key={product.id}
@@ -84,6 +87,7 @@ const SectionCategoryProducts = ({ titlePrefix, category }: CategoryProductsProp
                 price={product.price}
                 image={product.image}
                 rating={product.rating}
+                category={product.category}
               />
             ))}
         </ul>

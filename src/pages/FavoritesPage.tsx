@@ -5,16 +5,44 @@ import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import {
   clearFavorites,
   selectFavorites,
-  selectFavoritesCount,
 } from "../redux/slices/favoritesSlice";
+
+import {
+  selectSearchValue,
+  setSearchValue,
+} from "../redux/slices/searchBarSlice";
+import { selectSortingOption } from "../redux/slices/productFilteringSlice";
+
+import { ProductType } from "../types";
+import filterAndSortProducts, {
+  sortingOptionsType,
+} from "../helpers/productFiltering";
 
 import { TbHeartMinus } from "react-icons/tb";
 import { MdDeleteSweep } from "react-icons/md";
+import { useEffect } from "react";
 
 const FavoritesPage = () => {
   const dispatch = useAppDispatch();
   const { favoritesList } = useAppSelector(selectFavorites);
-  const favoritesCount = useAppSelector(selectFavoritesCount);
+
+  useEffect(() => {
+    dispatch(setSearchValue(""));
+  }, [dispatch]);
+
+  // to apply filters on favorites list (search by product title and description and sorting by one option)
+  const valueToSearch = useAppSelector(selectSearchValue);
+  const sortingOption = useAppSelector(selectSortingOption);
+
+  const filteredFavoritesList =
+    favoritesList &&
+    filterAndSortProducts({
+      products: favoritesList as ProductType[],
+      valueToSearch,
+      sortingOption: sortingOption as sortingOptionsType,
+    });
+
+  const favoritesCount = filteredFavoritesList.length;
 
   return (
     <UserItemsPageWrapper
@@ -45,7 +73,7 @@ const FavoritesPage = () => {
           </p>
         </div>
       ) : (
-        favoritesList.map((product) => (
+        filteredFavoritesList.map((product) => (
           <ProductCard key={product.id} {...product} />
         ))
       )}

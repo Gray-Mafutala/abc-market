@@ -1,5 +1,7 @@
 import { useMemo } from "react";
+import { useNavigate } from "react-router-dom";
 
+import { selectAuth } from "../../redux/slices/authSlice";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import {
   selectIsLiked,
@@ -12,20 +14,19 @@ import StarRating from "../UI/StarRating";
 import { HiHeart } from "react-icons/hi";
 import { TbDiscountCheckFilled } from "react-icons/tb";
 
-type ProductCardProps = {
-  id: number;
-  title: string;
-  description: string;
-  price: number;
-  image: string;
-  rating: { rate: number; count: number };
-};
+import { ProductType } from "../../types";
 
-const ProductCard = (details: ProductCardProps) => {
-  const { id, title, /*description,*/ price, image, rating } = details;
+const ProductCard = (details: ProductType) => {
+  const { id, title, price, image, rating } = details;
 
+  const { currentUser } = useAppSelector(selectAuth);
   const dispatch = useAppDispatch();
   const isLiked = useAppSelector((state) => selectIsLiked(state, id));
+
+  const navigate = useNavigate();
+  const handleToggleFavorite = () => {
+    currentUser ? dispatch(toggleFavorite(details)) : navigate("/login");
+  };
 
   // generate a fake discount % between 10-50 (or not, randomly)
   const discountPercentage = useMemo(() => {
@@ -33,7 +34,7 @@ const ProductCard = (details: ProductCardProps) => {
   }, []);
 
   const getPriceBeforeDiscount = (price: number, discountPer: number) =>
-    parseFloat((price + (price * discountPer) / 100).toFixed(2));
+    parseFloat((price * (1 + discountPer / 100)).toFixed(2));
 
   return (
     <li
@@ -54,7 +55,7 @@ const ProductCard = (details: ProductCardProps) => {
 
       {/* like btn */}
       <button
-        onClick={() => dispatch(toggleFavorite(details))}
+        onClick={handleToggleFavorite}
         className={
           isLiked
             ? `absolute top-2 right-2 bg-blue-light rounded-full p-1
