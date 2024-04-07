@@ -3,7 +3,7 @@ import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import { Link } from "react-router-dom";
 
 type SlidingBannerAdsProps = {
-  sliders: { imgPath: string; alt: string; link: string; id: string }[];
+  sliders: { img: string; alt: string; link: string; id: string }[];
 };
 
 const SlidingBannerAds = ({ sliders }: SlidingBannerAdsProps) => {
@@ -87,10 +87,10 @@ const SlidingBannerAds = ({ sliders }: SlidingBannerAdsProps) => {
         className="relative flex h-80 overflow-x-hidden rounded-2xl
         overflow-hidden"
       >
-        {sliders.map(({ imgPath, alt, link, id }, index) => (
+        {sliders.map(({ img, alt, link, id }, index) => (
           <Link key={id} to={link}>
             <img
-              src={imgPath}
+              src={img}
               alt={alt}
               className={
                 index === currentSlide

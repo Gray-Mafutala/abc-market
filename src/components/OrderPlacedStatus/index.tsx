@@ -35,7 +35,7 @@ const OrderPlacedStatus = () => {
       closeBtnAddStyles="top-3 right-3 mobileXL:-right-12 mobileXL:top-0"
       innerWrapperStyles="relative w-full h-screen mobileL:max-w-[480px] mx-auto
       mobileL:h-auto mobileL:mt-10 mobileL:rounded-lg bg-white text-gray-500
-      font-medium py-4 px-5 flex pt-10 text-center"
+      font-medium py-4 px-5 flex justify-center pt-10 text-center"
     >
       {/* order not placed - ERROR */}
       {orderPlaced.status === OrderPlacedStatusEnum.Error && (
