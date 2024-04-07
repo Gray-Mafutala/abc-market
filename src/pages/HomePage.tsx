@@ -12,8 +12,8 @@ import SearchResults from "../components/SearchResults";
 
 import JewelryImg from "../assets/images/banner/jewelry.jpg";
 import ElectronicsImg from "../assets/images/banner/electronics.jpg";
-import MensClothingImg from "../assets/images/banner/men's-clothing.jpg";
-import WomensClothingImg from "../assets/images/banner/women's-clothing.jpg";
+import MensClothingImg from "../assets/images/banner/mens-clothing.jpg";
+import WomensClothingImg from "../assets/images/banner/womens-clothing.jpg";
 
 const sliders = [
   {
