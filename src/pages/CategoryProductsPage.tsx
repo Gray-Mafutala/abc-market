@@ -2,7 +2,7 @@ import { useParams } from "react-router-dom";
 import { ProductType } from "../types";
 
 import { useAppSelector } from "../redux/hooks";
-import { selectSortingOption } from "../redux/slices/productFilteringSlice";
+import { SortingOptionsValue, selectSortingOption } from "../redux/slices/productFilteringSlice";
 import { selectSearchValue } from "../redux/slices/searchBarSlice";
 
 import useFetch from "../hooks/useFetch";
@@ -12,9 +12,7 @@ import FetchDataErrorDisplay from "../components/UI/FetchDataErrorDisplay";
 import NoProductFound from "../components/UI/NoProductFound";
 import CustomerX from "../components/Sections/CustomerX";
 
-import filterAndSortProducts, {
-  sortingOptionsType,
-} from "../helpers/productFiltering";
+import filterAndSortProducts from "../helpers/productFiltering";
 
 const CategoryProductsPage = () => {
   // fetch data of current category
@@ -36,7 +34,7 @@ const CategoryProductsPage = () => {
     filterAndSortProducts({
       products: data as ProductType[],
       valueToSearch,
-      sortingOption: sortingOption as sortingOptionsType,
+      sortingOption: sortingOption as SortingOptionsValue,
     });
 
   return (
@@ -80,8 +78,7 @@ const CategoryProductsPage = () => {
             </ul>
           )}
 
-          {/* C - if isLoading===false, then show all products 
-            of this category (as ProductCard)  */}
+          {/* C - if isLoading===false, then show all products of this category (as ProductCard) */}
           {!error &&
             !isLoading &&
             filteredProducts &&

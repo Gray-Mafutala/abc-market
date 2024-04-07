@@ -79,7 +79,7 @@ const LoginForm = () => {
 
     try {
       await signInWithEmailAndPassword(firebaseAuth, email, password);
-      // go to the page we wanted to access before logging in, else go to HomePage.
+      // go to the page we wanted to access before logging in, else go to HomePage
       location.state?.path ? navigate(location.state.path) : navigate("/");
 
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -177,7 +177,7 @@ const LoginForm = () => {
           hover:border-primary-blue/80 active:bg-blue-light 
           active:text-primary-blue disabled:bg-primary-blue/10 
           disabled:text-primary-blue/30 disabled:border-primary-blue/10
-          duration-300 flex items-center justify-center gap-x-3 whitespace-nowrap test"
+          duration-300 flex items-center justify-center gap-x-3 whitespace-nowrap"
         >
           Sign in
           {isSubmitting && (

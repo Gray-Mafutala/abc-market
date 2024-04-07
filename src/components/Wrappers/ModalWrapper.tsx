@@ -5,6 +5,7 @@ import { CgClose } from "react-icons/cg";
 type ModalWrapperProps = {
   children: React.ReactNode;
   onClose: () => void;
+  withCloseBtn?: boolean;
   modalWrapperAddStyles?: string;
   innerWrapperStyles: string;
   closeBtnAddStyles?: string;
@@ -14,6 +15,7 @@ type ModalWrapperProps = {
 const ModalWrapper = ({
   children,
   onClose,
+  withCloseBtn = true,
   modalWrapperAddStyles = "",
   innerWrapperStyles,
   closeBtnAddStyles = "",
@@ -26,12 +28,14 @@ const ModalWrapper = ({
     };
   }, [isOpen]);
 
+  const handleClose = () => withCloseBtn && onClose();
+
   return createPortal(
-    //  modal wrapper
+    // modal wrapper
     <div className={`${modalWrapperAddStyles} fixed w-full h-full z-50`}>
       {/* outer wrapper container (for adding scrollbar) */}
       <div
-        onClick={onClose}
+        onClick={handleClose}
         className="block overflow-y-auto scrollbar-w-2 h-screen bg-black/10
         backdrop-blur-sm"
       >
@@ -41,15 +45,16 @@ const ModalWrapper = ({
           className={innerWrapperStyles}
         >
           {/* btn to close modal */}
-          <button
-            onClick={onClose}
-            className={`${closeBtnAddStyles} absolute p-[6px]
-            rounded-[50%] text-gray-700 bg-gray-50 duration-200
-            hover:bg-blue-light hover:text-primary-blue
-            shadow-[#43475545_0px_0px_0.25em,_#5a7dbc0d_0px_0.25em_1em]`}
-          >
-            <CgClose className="text-[22px]" />
-          </button>
+          {withCloseBtn && (
+            <button
+              onClick={onClose}
+              className={`${closeBtnAddStyles} absolute p-[6px] rounded-[50%] 
+              text-gray-700 bg-gray-50 duration-200 hover:bg-blue-light
+              hover:text-primary-blue shadow-[#43475545_0px_0px_0.25em,_#5a7dbc0d_0px_0.25em_1em]`}
+            >
+              <CgClose className="text-[22px]" />
+            </button>
+          )}
 
           {/* content */}
           {children}

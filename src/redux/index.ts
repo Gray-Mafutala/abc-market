@@ -9,6 +9,7 @@ import authSlice from "./slices/authSlice";
 import productFilteringSlice from "./slices/productFilteringSlice";
 import searchBarSlice from "./slices/searchBarSlice";
 import mobileMenuSlice from "./slices/mobileMenu";
+import orderPlacedSlice from "./slices/orderPlacedSlice";
 
 import shoppingCartSlice, {
   CART_LOCAL_STORAGE_KEY,
@@ -48,6 +49,7 @@ const store = configureStore({
     searchBar: searchBarSlice.reducer,
     productFiltering: productFilteringSlice.reducer,
     mobileMenu: mobileMenuSlice.reducer,
+    orderPlaced: orderPlacedSlice.reducer,
   },
 
   middleware: (getDefaultMiddleware) =>

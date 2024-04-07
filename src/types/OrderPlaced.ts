@@ -1,12 +1,15 @@
 import { Timestamp } from "firebase/firestore";
 
+export type OrderPlacedProductDetailsType = {
+  id: number;
+  quantity: number;
+  unitPrice: number;
+};
+
 export interface OrderPlacedType {
-  createAt: Timestamp;
+  createdAt: Timestamp;
+  docId: string;
   orderId: string;
-  product: {
-    id: number;
-    quantity: number;
-    unitPrice: number;
-  }[];
+  products: OrderPlacedProductDetailsType[];
   totalPaid: number;
 }

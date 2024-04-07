@@ -1,35 +1,40 @@
-/* eslint-disable no-unused-vars */
 import { useEffect, useState } from "react";
 
 import { firebaseFirestore } from "../firebase";
 import { getDocs, collection } from "firebase/firestore";
 
-const useGetDocsFromFirestore = (collectionName: string) => {
-  const [docs, setDocs] = useState([]);
+const useGetDocsFromFirestore = <T>(collectionName: string) => {
+  const [docs, setDocs] = useState<T[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<Error | null>(null);
 
   useEffect(() => {
-    const docsRef = collection(firebaseFirestore, collectionName);
+    // check if online or not
+    if (navigator.onLine) {
+      const docsRef = collection(firebaseFirestore, collectionName);
 
-    getDocs(docsRef)
-      .then((snapshot) => {
-        const docsList = [];
-        snapshot.forEach((doc) => {
-          docsList.push({ id: doc.id, ...doc.data() });
-        });
+      getDocs(docsRef)
+        .then((snapshot) => {
+          const docsList = snapshot.docs.map(
+            (doc) => ({ id: doc.id, ...doc.data() } as T)
+          );
+          setDocs(docsList);
+        })
 
-        console.log("docsList:", docsList);
+        .catch((error) => setError(error))
+        .finally(() => setIsLoading(false));
+    } else {
+      setError({
+        message:
+          "It seems you are offline.",
+        name: "ERR_INTERNET_DISCONNECTED",
+      });
 
-        setDocs(docsList);
-      })
-
-      .catch((error) => setError(error))
-
-      .finally(() => setIsLoading(false));
+      setIsLoading(false);
+    }
   }, [collectionName]);
 
-  return [docs, isLoading, error];
+  return { docs, isLoading, error };
 };
 
 export default useGetDocsFromFirestore;

@@ -19,7 +19,7 @@ const favoritesSlice = createSlice({
   initialState,
 
   reducers: {
-     toggleFavorite: (state, action: PayloadAction<ProductType>) => {
+    toggleFavorite: (state, action: PayloadAction<ProductType>) => {
       if (
         !state.favoritesList.find((product) => product.id === action.payload.id)
       ) {
@@ -37,11 +37,14 @@ const favoritesSlice = createSlice({
   },
 });
 
-export const { toggleFavorite, clearFavorites } =
-  favoritesSlice.actions;
+export const { toggleFavorite, clearFavorites } = favoritesSlice.actions;
+
 export const selectFavorites = (state: RootState) => state.favorites;
+
 export const selectIsLiked = (state: RootState, id: number) =>
-state.favorites.favoritesList.some((product) => product.id === id);
-export const selectFavoritesCount = (state: RootState) => state.favorites.favoritesList.length;
+  state.favorites.favoritesList.some((product) => product.id === id);
+
+export const selectFavoritesCount = (state: RootState) =>
+  state.favorites.favoritesList.length;
 
 export default favoritesSlice;

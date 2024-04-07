@@ -25,6 +25,8 @@ const mobileMenuSlice = createSlice({
 });
 
 export const { openMobileMenu, closeMobileMenu } = mobileMenuSlice.actions;
+
 export const selectMobileMenuIsOpen = (state: RootState) =>
   state.mobileMenu.mobileMenuIsOpen;
+
 export default mobileMenuSlice;

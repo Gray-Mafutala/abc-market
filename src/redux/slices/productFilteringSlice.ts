@@ -1,34 +1,26 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { RootState } from "..";
 
-export const sortingOptionsValue = {
-  DEFAULT: "",
-  LOW_TO_HIGH: "price-asc-rank",
-  HIGH_TO_LOW: "price-desc-rank",
-  AVG_CUSTOMER_REVIEW: "review-rank",
-};
-
-export const productCategoriesValue = {
-  ALL: "all",
-  ELECTRONICS: "electronics",
-  JEWELERY: "jewelery",
-  MENS_CLOTHING: "men's clothing",
-  WOMENS_CLOTHING: "women's clothing",
-};
+export enum SortingOptionsValue {
+  DEFAULT,
+  LOW_TO_HIGH,
+  HIGH_TO_LOW,
+  AVG_CUSTOMER_REVIEW,
+}
 
 interface productFilteringState {
-  sortingOption: string;
+  sortingOption: SortingOptionsValue;
 }
 
 const initialState: productFilteringState = {
-  sortingOption: sortingOptionsValue.DEFAULT,
+  sortingOption: SortingOptionsValue.DEFAULT,
 };
 
 const productFilteringSlice = createSlice({
   name: "productFiltering",
   initialState,
   reducers: {
-    setSortingOption: (state, action: PayloadAction<string>) => {
+    setSortingOption: (state, action: PayloadAction<SortingOptionsValue>) => {
       state.sortingOption = action.payload;
     },
   },

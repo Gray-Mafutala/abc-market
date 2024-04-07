@@ -47,7 +47,7 @@ const UserAccountPage = () => {
           </header>
 
           {/* body */}
-          {/* avatar, full name and email */}
+          {/* avatar, fullname and email */}
           <div className="flex flex-col gap-y-2 items-center text-center justify-between">
             {currentUser?.photoUrl ? (
               <img
@@ -71,7 +71,7 @@ const UserAccountPage = () => {
             </p>
           </div>
 
-          {/* Links to orders and favorites pages */}
+          {/* Links to go to orders and favorites pages */}
           <div
             className="flex flex-col mobileL:flex-row mobileL:justify-between
             text-base mobileM:text-lg font-medium text-slate-500 gap-5"

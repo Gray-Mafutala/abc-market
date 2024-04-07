@@ -5,13 +5,16 @@ import { useNavigate } from "react-router-dom";
 const PageNotFound = () => {
   const navigate = useNavigate();
 
-  const timeInSec = 5;
+  const durationInSeconde = 5;
 
-  const [counter, setCounter] = useState(timeInSec);
+  const [counter, setCounter] = useState(durationInSeconde);
   useEffect(() => {
     const counterId = setInterval(() => setCounter((value) => value - 1), 1000);
-    setTimeout(() => navigate("/"), timeInSec * 1000);
-    return () => clearInterval(counterId);
+    const timeoutId = setTimeout(() => navigate("/"), counter * 1000);
+    return () => {
+      clearInterval(counterId);
+      clearTimeout(timeoutId);
+    };
   }, [counter, navigate]);
 
   return (

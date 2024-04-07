@@ -1,4 +1,4 @@
-import { sortingOptionsValue } from "../redux/slices/productFilteringSlice";
+import { SortingOptionsValue } from "../redux/slices/productFilteringSlice";
 import { ProductType } from "../types";
 
 // Search products
@@ -31,24 +31,23 @@ const searchByTitleAndDesc = ({
 };
 
 // Sort products by "option"
-export type sortingOptionsType = keyof typeof sortingOptionsValue;
 type sortByOptionType = {
   products: ProductType[];
-  option: sortingOptionsType;
+  option: SortingOptionsValue;
 };
 const sortByOption = ({ products, option }: sortByOptionType) => {
   switch (option) {
-    case sortingOptionsValue.LOW_TO_HIGH:
+    case SortingOptionsValue.LOW_TO_HIGH:
       return products.sort(
         (productA, productB) => productA.price - productB.price
       );
 
-    case sortingOptionsValue.HIGH_TO_LOW:
+    case SortingOptionsValue.HIGH_TO_LOW:
       return products.sort(
         (productA, productB) => productB.price - productA.price
       );
 
-    case sortingOptionsValue.AVG_CUSTOMER_REVIEW:
+    case SortingOptionsValue.AVG_CUSTOMER_REVIEW:
       return products.sort(
         (productA, productB) => productB.rating.rate - productA.rating.rate
       );
@@ -62,7 +61,7 @@ const sortByOption = ({ products, option }: sortByOptionType) => {
 type filterAndSortProductsType = {
   products: ProductType[];
   valueToSearch: string;
-  sortingOption: sortingOptionsType;
+  sortingOption: SortingOptionsValue;
 };
 const filterAndSortProducts = ({
   products,

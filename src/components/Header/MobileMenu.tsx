@@ -35,8 +35,8 @@ const MobileMenu = () => {
         onClose={() => dispatch(closeMobileMenu())}
         modalWrapperAddStyles={
           mobileMenuIsOpen
-            ? "inset-0 duration-300"
-            : "inset-0 -translate-x-[100%] duration-300"
+            ? "inset-0 duration-200"
+            : "inset-0 -translate-x-[100%] duration-200"
         }
         closeBtnAddStyles="top-3 right-3 mobileM:-right-10"
         innerWrapperStyles="relative w-full mobileM:max-w-[400px] 
@@ -166,7 +166,7 @@ const MobileMenu = () => {
       <button
         onClick={() => dispatch(openMobileMenu())}
         className="px-[6px] py-[6px] rounded-[4px] flex items-center 
-        justify-center odd:bg-blue-light text-primary-blue/80 duration-300 
+        justify-center bg-blue-light text-primary-blue/80 duration-300 
         hover:bg-primary-blue/80 hover:text-white active:bg-transparent
         active:text-primary-blue active:shadow-[0_0_0_2px_#008ecc]
         focus:shadow[0_0_0_2px_#008ecc]

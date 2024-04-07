@@ -19,7 +19,7 @@ const Routing = () => {
     { path: "/", element: <HomePage /> },
 
     {
-      path: "products/category/:category",
+      path: "/products/category/:category",
       element: <CategoryProductsPage />,
     },
 

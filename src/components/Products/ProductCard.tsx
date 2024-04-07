@@ -57,11 +57,11 @@ const ProductCard = (details: ProductType) => {
       <button
         onClick={handleToggleFavorite}
         className={
-          isLiked
+          currentUser && isLiked
             ? `absolute top-2 right-2 bg-blue-light rounded-full p-1
             duration-500 ease-out text-rose-500 active:animate-ping`
             : `absolute top-2 right-2 bg-blue-light rounded-full p-1
-            duration-500 ease-out text-slate-300 hover:text-rose-500
+            duration-500 ease-out text-slate-300 hover:text-rose-300
             active:animate-ping `
         }
       >
@@ -74,6 +74,7 @@ const ProductCard = (details: ProductType) => {
         <img
           src={image}
           alt={title}
+          loading="lazy"
           className="w-full h-[100px] object-contain"
         />
 

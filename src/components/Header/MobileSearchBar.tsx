@@ -22,13 +22,13 @@ const MobileSearchBar = () => {
         modalWrapperAddStyles={
           mobileSearchBarIsOpen
             ? "inset-0 duration-300"
-            : "inset-0 -translate-y-[100%] duration-300"
+            : "inset-0 -translate-y-[150%] duration-300"
         }
         closeBtnAddStyles="-top-12 right-4"
-        innerWrapperStyles="max-w-xl mx-auto relative mt-16 px-3 mobileM:px-4"
+        innerWrapperStyles="relative max-w-xl mx-auto mt-16 px-3 mobileM:px-4"
       >
-        <SearchBar />
-      </ModalWrapper>
+    <SearchBar />
+    </ModalWrapper>
 
       {/* btn to show SearchBar wrapper */}
       <button

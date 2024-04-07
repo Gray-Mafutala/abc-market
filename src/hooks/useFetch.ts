@@ -6,7 +6,7 @@ interface State<T> {
   error: Error | null;
 }
 
-const useFetch = <T = unknown>(url: string): State<T> => {
+const useFetch = <T>(url: string): State<T> => {
   const [data, setData] = useState<T | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<Error | null>(null);

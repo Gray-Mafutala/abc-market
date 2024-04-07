@@ -2,10 +2,8 @@ import useFetch from "../../hooks/useFetch";
 
 import { useAppSelector } from "../../redux/hooks";
 import { selectSearchValue } from "../../redux/slices/searchBarSlice";
-import { selectSortingOption } from "../../redux/slices/productFilteringSlice";
-import filterAndSortProducts, {
-  sortingOptionsType,
-} from "../../helpers/productFiltering";
+import { SortingOptionsValue, selectSortingOption } from "../../redux/slices/productFilteringSlice";
+import filterAndSortProducts from "../../helpers/productFiltering";
 
 import { ProductType } from "../../types";
 import ProductCard from "../Products/ProductCard";
@@ -26,7 +24,7 @@ const SearchResults = () => {
     filterAndSortProducts({
       products: data as ProductType[],
       valueToSearch,
-      sortingOption: sortingOption as sortingOptionsType,
+      sortingOption: sortingOption as SortingOptionsValue,
     });
 
   return (

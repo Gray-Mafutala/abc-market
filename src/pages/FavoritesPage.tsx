@@ -11,15 +11,17 @@ import {
   selectSearchValue,
   setSearchValue,
 } from "../redux/slices/searchBarSlice";
-import { selectSortingOption } from "../redux/slices/productFilteringSlice";
+import {
+  SortingOptionsValue,
+  selectSortingOption,
+} from "../redux/slices/productFilteringSlice";
 
 import { ProductType } from "../types";
-import filterAndSortProducts, {
-  sortingOptionsType,
-} from "../helpers/productFiltering";
+import filterAndSortProducts from "../helpers/productFiltering";
 
 import { TbHeartMinus } from "react-icons/tb";
-import { MdDeleteSweep } from "react-icons/md";
+import { RiDeleteBinFill } from "react-icons/ri";
+
 import { useEffect } from "react";
 
 const FavoritesPage = () => {
@@ -39,7 +41,7 @@ const FavoritesPage = () => {
     filterAndSortProducts({
       products: favoritesList as ProductType[],
       valueToSearch,
-      sortingOption: sortingOption as sortingOptionsType,
+      sortingOption: sortingOption as SortingOptionsValue,
     });
 
   const favoritesCount = filteredFavoritesList.length;
@@ -57,11 +59,10 @@ const FavoritesPage = () => {
       btnClearItems={
         <button
           onClick={() => dispatch(clearFavorites())}
-          className=" flex items-center gap-x-1 px-2 py-1 rounded-md font-medium
-          bg-primary-blue text-white hover:bg-slate-700 hover:text-white/90 duration-300"
+          title="Clear all favorites"
+          className="text-slate-500 hover:text-primary-blue p-1 duration-200"
         >
-          <MdDeleteSweep className="text-2xl mobileM:text-3xl" />
-          <span className="hidden mobileM:block">Clear all</span>
+          <RiDeleteBinFill size={24}  />
         </button>
       }
     >

@@ -8,22 +8,28 @@ import SearchResults from "../components/SearchResults";
 
 const sliders = [
   {
-    imgPath: "./src/assets/images/ads-banner/ads-1.jpg",
-    alt: "a1",
-    link: "",
+    imgPath: "./src/assets/images/banner/jewelry.jpg",
+    alt: "jewelry",
+    link: "/products/category/jewelery",
     id: "01",
   },
   {
-    imgPath: "./src/assets/images/ads-banner/ads-2.jpg",
-    alt: "a2",
-    link: "",
+    imgPath: "./src/assets/images/banner/electronics.jpg",
+    alt: "electronics",
+    link: "/products/category/electronics",
     id: "02",
   },
   {
-    imgPath: "./src/assets/images/ads-banner/ads-3.jpg",
-    alt: "a3",
-    link: "",
+    imgPath: "./src/assets/images/banner/men's-clothing.jpg",
+    alt: "men's-clothing",
+    link: "/products/category/men's%20clothing",
     id: "03",
+  },
+  {
+    imgPath: "./src/assets/images/banner/women's-clothing.jpg",
+    alt: "women's clothing",
+    link: "/products/category/women's%20clothing",
+    id: "04",
   },
 ];
 
