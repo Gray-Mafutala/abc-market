@@ -1,15 +1,19 @@
 import { useAppSelector } from "../redux/hooks";
 import { selectSearchValue } from "../redux/slices/searchBarSlice";
+import {
+  SortingOptionsValue,
+  selectSortingOption,
+} from "../redux/slices/productFilteringSlice";
 
 import SectionCategoryProducts from "../components/Sections/SectionCategoryProducts";
 import CustomerX from "../components/Sections/CustomerX";
 import SlidingBannerAds from "../components/Sections/SlidingBannerAds";
 import SearchResults from "../components/SearchResults";
 
-import JewelryImg from "../assets/images/banner/jewelry.jpg"
-import ElectronicsImg from "../assets/images/banner/electronics.jpg"
-import MensClothingImg from "../assets/images/banner/men's-clothing.jpg"
-import WomensClothingImg from "../assets/images/banner/women's-clothing.jpg"
+import JewelryImg from "../assets/images/banner/jewelry.jpg";
+import ElectronicsImg from "../assets/images/banner/electronics.jpg";
+import MensClothingImg from "../assets/images/banner/men's-clothing.jpg";
+import WomensClothingImg from "../assets/images/banner/women's-clothing.jpg";
 
 const sliders = [
   {
@@ -31,7 +35,7 @@ const sliders = [
     id: "03",
   },
   {
-    img:WomensClothingImg,
+    img: WomensClothingImg,
     alt: "women's clothing",
     link: "/products/category/women's%20clothing",
     id: "04",
@@ -40,42 +44,45 @@ const sliders = [
 
 const HomePage = () => {
   const valueToSearch = useAppSelector(selectSearchValue);
+  const sortingOption = useAppSelector(selectSortingOption);
 
   return (
-    <main className="common-main-container-styles">   
-      {valueToSearch === "" && (
-        // center inner wrapper
-        <div className="centered-container flex flex-col gap-y-12 mobileL:gap-y-16 tablet:gap-20">
-          <SlidingBannerAds sliders={sliders} />
+    <main className="common-main-container-styles">
+      {(valueToSearch === "" &&
+        sortingOption === SortingOptionsValue.DEFAULT) && (
+          // center inner wrapper
+          <div className="centered-container flex flex-col gap-y-12 mobileL:gap-y-16 tablet:gap-20">
+            <SlidingBannerAds sliders={sliders} />
 
-          {/* Electronics products */}
-          <SectionCategoryProducts
-            titlePrefix="The best on"
-            category="electronics"
-          />
+            {/* Electronics products */}
+            <SectionCategoryProducts
+              titlePrefix="The best on"
+              category="electronics"
+            />
 
-          {/* Jewelery products */}
-          <SectionCategoryProducts titlePrefix="Top" category="jewelery" />
+            {/* Jewelery products */}
+            <SectionCategoryProducts titlePrefix="Top" category="jewelery" />
 
-          {/* Men's clothing products */}
-          <SectionCategoryProducts
-            titlePrefix="Best value on"
-            category="men's clothing"
-          />
+            {/* Men's clothing products */}
+            <SectionCategoryProducts
+              titlePrefix="Best value on"
+              category="men's clothing"
+            />
 
-          {/* Women's clothing products */}
-          <SectionCategoryProducts
-            titlePrefix="Enjoy discounts on"
-            category="women's clothing"
-          />
+            {/* Women's clothing products */}
+            <SectionCategoryProducts
+              titlePrefix="Enjoy discounts on"
+              category="women's clothing"
+            />
 
-          {/* Customer Experiences section */}
-          <CustomerX />
-        </div>
-      )}
+            {/* Customer Experiences section */}
+            <CustomerX />
+          </div>
+        )}
 
       {/* what will be displayed after a search */}
-      {valueToSearch !== "" && <SearchResults />}
+      {(valueToSearch !== "" ||
+        sortingOption !== SortingOptionsValue.DEFAULT) && <SearchResults />}
     </main>
   );
 };

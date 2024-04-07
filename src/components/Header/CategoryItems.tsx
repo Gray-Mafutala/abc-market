@@ -4,6 +4,11 @@ import { useAppDispatch } from "../../redux/hooks";
 import { setSearchValue } from "../../redux/slices/searchBarSlice";
 import { closeMobileMenu } from "../../redux/slices/mobileMenu";
 
+import {
+  SortingOptionsValue,
+  setSortingOption,
+} from "../../redux/slices/productFilteringSlice";
+
 import { MdOutlinePhonelink } from "react-icons/md";
 import { RiShirtFill } from "react-icons/ri";
 import { GiBigDiamondRing, GiLargeDress } from "react-icons/gi";
@@ -36,13 +41,18 @@ const CategoryItems = ({
 }: CategoryItems) => {
   const dispatch = useAppDispatch();
 
+  const resetSearchBarFilters = () => {
+    dispatch(setSearchValue(""));
+    dispatch(setSortingOption(SortingOptionsValue.DEFAULT));
+  };
+
   return (
     <>
       {categories.map(({ title, icon, link }) => (
         <li key={title} onClick={() => dispatch(closeMobileMenu())}>
           <NavLink
             to={`/products/category/${link}`}
-            onClick={() => dispatch(setSearchValue(""))}
+            onClick={resetSearchBarFilters}
             className={({ isActive }) =>
               isActive
                 ? `${activeItemStyles} flex items-center gap-x-4`

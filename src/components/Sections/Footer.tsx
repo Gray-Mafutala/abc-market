@@ -1,7 +1,20 @@
-import { RiMastercardFill, RiPaypalFill, RiVisaLine } from "react-icons/ri";
 import { Link } from "react-router-dom";
 
+import { useAppDispatch } from "../../redux/hooks";
+import { setSearchValue } from "../../redux/slices/searchBarSlice";
+import { SortingOptionsValue, setSortingOption } from "../../redux/slices/productFilteringSlice";
+
+import { RiMastercardFill, RiPaypalFill, RiVisaLine } from "react-icons/ri";
+
 const Footer = () => {
+  const dispatch = useAppDispatch();
+
+  const resetSearchBarFilters = () => {
+    window.scrollTo(0, 0);
+    dispatch(setSearchValue(""));
+    dispatch(setSortingOption(SortingOptionsValue.DEFAULT));
+  };
+
   return (
     <footer className="bg-gray-200 text-slate-500 pt-16 pb-5 px-4">
       {/* center inner wrapper */}
@@ -20,7 +33,7 @@ const Footer = () => {
               className="text-2xl text-primary-blue/80 font-bold 
               duration-300 hover:opacity-80 whitespace-nowrap"
             >
-              <Link to="/" onClick={() => window.scrollTo(0, 0)}>
+              <Link to="/" onClick={resetSearchBarFilters}>
                 ABC <span className="text-slate-400">Market</span>
               </Link>
             </h1>

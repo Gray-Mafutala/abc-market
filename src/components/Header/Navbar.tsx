@@ -4,11 +4,18 @@ import MobileMenu from "./MobileMenu";
 import SearchBar from "./SearchBar";
 import MobileSearchBar from "./MobileSearchBar";
 import UserItems from "./UserItems";
+
 import { useAppDispatch } from "../../redux/hooks";
 import { setSearchValue } from "../../redux/slices/searchBarSlice";
+import { SortingOptionsValue, setSortingOption } from "../../redux/slices/productFilteringSlice";
 
 const Navbar = () => {
   const dispatch = useAppDispatch();
+
+  const resetSearchBarFilters = () => {
+    dispatch(setSearchValue(""));
+    dispatch(setSortingOption(SortingOptionsValue.DEFAULT));
+  };
 
   return (
     <nav className="px-4 bg-white border-b border-b-[#ededed]">
@@ -25,7 +32,7 @@ const Navbar = () => {
             className="text-2xl text-primary-blue/80 font-bold 
             duration-300 hover:opacity-80 whitespace-nowrap"
           >
-            <Link to="/" onClick={() => dispatch(setSearchValue(""))}>
+            <Link to="/" onClick={resetSearchBarFilters}>
               ABC <span className="text-slate-400">Market</span>
             </Link>
           </h1>

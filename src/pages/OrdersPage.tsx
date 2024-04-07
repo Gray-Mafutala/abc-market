@@ -18,6 +18,7 @@ import {
   selectSearchValue,
   setSearchValue,
 } from "../redux/slices/searchBarSlice";
+import { SortingOptionsValue, setSortingOption } from "../redux/slices/productFilteringSlice";
 
 export const ORDERS_COLLECTION_NAME = "orders";
 
@@ -33,7 +34,8 @@ const OrdersPage = () => {
 
   const dispatch = useAppDispatch();
   useEffect(() => {
-    dispatch(setSearchValue(""));
+      dispatch(setSearchValue(""));
+      dispatch(setSortingOption(SortingOptionsValue.DEFAULT));
   }, [dispatch]);
 
   // to apply filters on orders list (search by order tracking number and sorting by date desc.)

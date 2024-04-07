@@ -14,6 +14,7 @@ import {
 import {
   SortingOptionsValue,
   selectSortingOption,
+  setSortingOption,
 } from "../redux/slices/productFilteringSlice";
 
 import { ProductType } from "../types";
@@ -30,6 +31,7 @@ const FavoritesPage = () => {
 
   useEffect(() => {
     dispatch(setSearchValue(""));
+    dispatch(setSortingOption(SortingOptionsValue.DEFAULT));
   }, [dispatch]);
 
   // to apply filters on favorites list (search by product title and description and sorting by one option)
